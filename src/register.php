@@ -67,7 +67,7 @@
                              <div class="col-12">
                                 <div class="form-material">
                                     <input type="text" class="js-datepicker form-control" id="example-datepicker4" name="example-datepicker4" data-week-start="1" data-autoclose="true" data-today-highlight="true" data-date-format="mm/dd/yy" placeholder="MM/DD/YY">
-                                    
+                                    <label for="example-datepicker4">Doğum Tarihi</label>
                                 </div>
                             </div>
                         </div>
