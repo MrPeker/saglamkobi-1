@@ -39,15 +39,6 @@
                 </div>
 				
                 <form class="js-validation-signup px-30" action="be_pages_auth_all.php" method="post">
-				    <div class="form-group row">
-                        <div class="col-12">
-                            <div class="form-material floating">
-							<button type="button" class="btn btn-outline-secondary min-width-125">Step 1</button>
-                            <button type="button" class="btn btn-outline-secondary min-width-125">Step 2</button>
-
-                            </div>
-                        </div>
-                    </div>
                     <div class="form-group row">
                         <div class="col-12">
                             <div class="form-material floating">
@@ -122,7 +113,7 @@
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-sm btn-hero btn-alt-success">
-                            <i class="fa fa-plus mr-10"></i> Hesap Oluştur
+                            <i class="fa fa-plus mr-10"></i> Devam Et
                         </button>
                         <div class="mt-30">
                             <a class="link-effect text-muted mr-10 mb-5 d-inline-block" href="#" data-toggle="modal" data-target="#modal-terms">
