@@ -47,7 +47,7 @@ var OpAuthSignUp = function() {
                             }
 
                             swal(
-                                'Oh, olamaz!',
+                                'Ah, olamaz!',
                                 message,
                                 'error'
                             );

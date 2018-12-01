@@ -65,10 +65,10 @@
                             <i class="si si-login mr-10"></i> Giriş Yap
                         </button>
                         <div class="mt-30">
-                            <a class="link-effect text-muted mr-10 mb-5 d-inline-block" href="op_auth_signup2.php">
+                            <a class="link-effect text-muted mr-10 mb-5 d-inline-block" href="register.php">
                                 <i class="fa fa-plus mr-5"></i> Hesap Oluştur
                             </a>
-                            <a class="link-effect text-muted mr-10 mb-5 d-inline-block" href="op_auth_reminder2.php">
+                            <a class="link-effect text-muted mr-10 mb-5 d-inline-block" href="forgotpassword.php">
                                 <i class="fa fa-warning mr-5"></i> Şifremi Unuttum
                             </a>
                         </div>

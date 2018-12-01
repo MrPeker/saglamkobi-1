@@ -1,2 +1,5 @@
 <?php
-$db = new PDO('mysql:host=localhost;dbname=hackhaton', "root", "Peacher01");
+
+session_start();
+
+$db = new PDO('mysql:host=127.0.0.1;dbname=hackathon', "root", "1234");
