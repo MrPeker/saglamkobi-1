@@ -1,5 +1,4 @@
 <?php
-
 if($_POST) {
     $name = $_POST['isletme-ismi'];
     $sector_id = $_POST['isletme-sektor'];
@@ -8,30 +7,8 @@ if($_POST) {
     $needs = $_POST['isletme-ihtiyac-durumu'];
     $description = $_POST['isletme-aciklama'];
 
-    require './config.php';
+    require 'config.php';
 
-    $query = $db->prepare('
-        INSERT INTO kobis ( "name", "sector_id", "type", "status", "needs", "description", created_at, updated_at )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    ');
-
-    $result = $query->execute([
-        $name,
-        $sector_id,
-        $type,
-        $status,
-        $needs,
-        $description,
-        time(),
-        time(),
-    ]);
-
-    var_dump($result);
-
-    if($result) {
-        echo json_encode([ 'status' => true, "message" => 'kobiIsCreated' ]);
-    } else {
-        echo json_encode([ 'status' => false, "message" => 'technicalError' ]);
-    }
-
+	MySqlQuery("INSERT INTO kobis (name,sector_id,type,status,needs,description,created_at,updated_at) values (?, ?, ?, ?, ?, ?, ?, ?)",array($name,$sector_id,$type,$status, $needs,$description,date("Y-m-d H:i:s"),date("Y-m-d H:i:s")));
+	echo json_encode(array('status' => true, "message" => 'kobiIsCreated'));
 }

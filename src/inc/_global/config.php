@@ -9,7 +9,6 @@
  */
 ob_start();
 session_start();
-
 // Include required classes
 require 'inc/_classes/Template.php';
 

@@ -1,9 +1,9 @@
 <?php require 'inc/_global/config.php'; ?>
 
 <?php
-
-    require 'helpers/Sector.php';
-
+	include("ajax/config.php");
+   
+	
     if(!$_SESSION['login']) {
         header('Location: /login.php');
     }
