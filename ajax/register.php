@@ -44,12 +44,11 @@ if (!is_null($_POST["signup-password"])) {
     die();
 }
 
-if ($db->query("Select COUNT(*) from Users where Tc='$PTC' OR email='$PEmail'")->fetchColumn() > 0) {
-    echo json_encode(array("status" => False, "message" => "userExists"));
+if ($db->query("Select COUNT(*) from Users where Tc='$PTC' OR email='$PEmail'")->fetchAll()[0][0] > 0) {
+    echo json_encode(array("status" => false, "message" => "userExists"));
     die();
 }
 try {
-    echo "insert into users (name,surname,tc,birthday,phone,email,password) values ('$PName','$PSurname','$PTC','$PBirthday','$PPhone','$PEmail','$PPassword')";
     $stmt1 = $db->prepare("insert into users (name,surname,tc,birthday,phone,email,password) values ('$PName','$PSurname','$PTC','$PBirthday','$PPhone','$PEmail','$PPassword')");
     if($stmt1->execute()) {
         $_SESSION['id'] = $db->lastInsertId();

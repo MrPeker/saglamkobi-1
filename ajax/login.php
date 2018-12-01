@@ -15,7 +15,7 @@ if(empty($user[0])){
     $_SESSION['surname'] = $user['surname'];
     $_SESSION['email'] = $user['email'];
     $_SESSION['tc'] = $user['tc'];
-    $_SESSION['tel'] = $user['tel'];
+    $_SESSION['tel'] = $user['phone'];
     $_SESSION['birthday'] = $user['birthday'];
     $_SESSION['login'] = true;
 

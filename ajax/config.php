@@ -1,6 +1,10 @@
 <?php
 /* Database Connect */
-$db = new PDO('mysql:host=localhost;dbname=hackhaton', "root", "Peacher01");
+#$db = new PDO('mysql:host=localhost;dbname=hackhaton', "root", "Peacher01");
+
+session_start();
+
+$db = new PDO('mysql:host=127.0.0.1;dbname=hackathon', "root", "1234");
 
 function MySqlQuery($q, $params, $return = "", $TekSatir = "") {
   global $db;
@@ -18,9 +22,11 @@ function MySqlQuery($q, $params, $return = "", $TekSatir = "") {
   }
 }
 
-if(!$_SESSION['login']) {
-	if(strpos($_SERVER['REQUEST_URI'], "ajax") === False){
-		header('Location: /login.php');
-	}	
+if(isset($_SESSION['login'])) {
+    if(!$_SESSION['login']) {
+        if(strpos($_SERVER['REQUEST_URI'], "ajax") === False){
+            header('Location: /login.php');
+        }
+    }
 }
 
