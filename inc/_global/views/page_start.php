@@ -51,7 +51,7 @@ MAIN CONTENT LAYOUT
     'main-content-boxed'                        Full width Main Content with a specific maximum width (screen width > 1200px)
     'main-content-narrow'                       Full width Main Content with a percentage width (screen width > 1200px)
 -->
-<div id="page-container"<?php $cb->page_classes(); ?>>
+<div id="page-container" class="side-scroll page-header-modern main-content-boxed side-trans-enabled" >
     <?php if(isset($cb->inc_side_overlay) && $cb->inc_side_overlay) { include($cb->inc_side_overlay); } ?>
     <?php if(isset($cb->inc_sidebar) && $cb->inc_sidebar) { include($cb->inc_sidebar); } ?>
     <?php if(isset($cb->inc_header) && $cb->inc_header) { include($cb->inc_header); } ?>

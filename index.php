@@ -9,7 +9,7 @@
 <?php $fetch = MySqlQuery('SELECT * FROM kobis WHERE user_id=?', [$_SESSION['id']], 'rows', 0); ?>
 
 <!-- Page Content -->
-<div class="content">
+<div class="content" style="">
     <div class="row gutters-tiny invisible" data-toggle="appear">
         <!-- Row #5 -->
         <?php if(empty($fetch)): ?>
@@ -36,7 +36,7 @@
             </div>
         </div>
         <?php endif; ?>
-	<div class="col-12 col-md-12 col-xl-12 gutters-tiny invisible" data-toggle="appear">
+	<div class="col-12 col-md-12 col-xl-12 gutters-tiny invisible" data-toggle="appear" style="background: white;">
 		<!-- If you put a checkbox in thead section, it will automatically toggle all tbody section checkboxes -->
 <table class="js-table-checkable table table-hover col-12 col-md-12 col-xl-12" style="width: 100%;">
                 <thead>
