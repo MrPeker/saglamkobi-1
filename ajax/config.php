@@ -28,5 +28,9 @@ if(isset($_SESSION['login'])) {
             header('Location: /login.php');
         }
     }
+} else {
+    if(strpos($_SERVER['REQUEST_URI'], "ajax") === False){
+        header('Location: /login.php');
+    }
 }
 
