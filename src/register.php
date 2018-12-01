@@ -5,11 +5,14 @@
 <?php $cb->get_css('js/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css'); ?>
 <?php $cb->get_css('js/plugins/select2/select2.min.css'); ?>
 <?php $cb->get_css('js/plugins/select2/select2-bootstrap.min.css'); ?>
+<?php $cb->get_css('js/plugins/sweetalert2/sweetalert2.min.css'); ?>
 <?php $cb->get_css('js/plugins/jquery-tags-input/jquery.tagsinput.min.css'); ?>
 <?php $cb->get_css('js/plugins/jquery-auto-complete/jquery.auto-complete.min.css'); ?>
 <?php $cb->get_css('js/plugins/ion-rangeslider/css/ion.rangeSlider.min.css'); ?>
 <?php $cb->get_css('js/plugins/ion-rangeslider/css/ion.rangeSlider.skinHTML5.min.css'); ?>
 <?php $cb->get_css('js/plugins/dropzonejs/min/dropzone.min.css'); ?>
+
+
 
 <?php require 'inc/_global/views/head_end.php'; ?>
 <?php require 'inc/_global/views/page_start.php'; ?>
@@ -38,7 +41,7 @@
                     <h2 class="h5 font-w400 text-muted mb-0">Lütfen ayrıntılarınızı ekleyin</h2>
                 </div>
 				
-                <form class="js-validation-signup px-30" action="be_pages_auth_all.php" method="post">
+                <form class="js-validation-signup px-30" onsubmit="return false;">
                     <div class="form-group row">
                         <div class="col-12">
                             <div class="form-material floating">
@@ -54,7 +57,15 @@
                                 <label for="signup-soyad">Soyad</label>
                             </div>
                         </div>
-                    </div>					
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <div class="form-material floating">
+                                <input type="text" class="form-control" id="signup-email" name="signup-email">
+                                <label for="signup-email">Email</label>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group row">
                         <div class="col-12">
                             <div class="form-material floating">
@@ -63,14 +74,14 @@
                             </div>
                         </div>
                     </div>
-                        <div class="form-group row">
-                             <div class="col-12">
-                                <div class="form-material">
-                                    <input type="text" class="js-datepicker form-control" id="example-datepicker4" name="example-datepicker4" data-week-start="1" data-autoclose="true" data-today-highlight="true" data-date-format="mm/dd/yy" placeholder="MM/DD/YY">
-                                    
-                                </div>
+                    <div class="form-group row">
+                         <div class="col-12">
+                            <div class="form-material">
+                                <input type="text" class="js-datepicker form-control" id="example-datepicker4" name="example-datepicker4" data-week-start="1" data-autoclose="true" data-today-highlight="true" data-date-format="mm/dd/yy" placeholder="MM/DD/YY">
+                                <label for="example-datepicker4">Doğum Tarihi</label>
                             </div>
                         </div>
+                    </div>
                     <div class="form-group row">
                         <div class="col-12">
                             <div class="form-material floating">
@@ -78,15 +89,8 @@
                                 <label for="signup-telefon">Telefon</label>
                             </div>
                         </div>
-                    </div>			
-                    <div class="form-group row">
-                        <div class="col-12">
-                            <div class="form-material floating">
-                                <input type="text" class="form-control" id="signup-telefon" name="signup-telefon">
-                                <label for="signup-telefon">Email</label>
-                            </div>
-                        </div>
-                    </div>						
+                    </div>
+
                     <div class="form-group row">
                         <div class="col-12">
                             <div class="form-material floating">
@@ -174,6 +178,7 @@
 <?php $cb->get_js('js/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js'); ?>
 <?php $cb->get_js('js/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js'); ?>
 <?php $cb->get_js('js/plugins/select2/select2.full.min.js'); ?>
+<?php $cb->get_js('js/plugins/sweetalert2/sweetalert2.min.js'); ?>
 <?php $cb->get_js('js/plugins/jquery-tags-input/jquery.tagsinput.min.js'); ?>
 <?php $cb->get_js('js/plugins/jquery-auto-complete/jquery.auto-complete.min.js'); ?>
 <?php $cb->get_js('js/plugins/masked-inputs/jquery.maskedinput.min.js'); ?>

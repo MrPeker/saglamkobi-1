@@ -20,6 +20,41 @@ var OpAuthSignUp = function() {
                 jQuery(e).closest('.form-group').removeClass('is-invalid');
                 jQuery(e).remove();
             },
+            submitHandler: function(e) {
+                $.ajax({
+                    url: '/ajax/register.php',
+                    method: 'POST',
+                    data: $(e).serialize(),
+                    success: function(response) {
+                        response = JSON.parse(response);
+                        if(response.status) {
+                            swal(
+                                'Harika iş!',
+                                'Başarıyla kayıt oldunuz! Yönlendiriliyorsunuz...',
+                                'success'
+                            );
+
+                            setTimeout(function(){
+                                location.href = '/index.php';
+                            }, 2200);
+
+                        } else {
+                            var message = '';
+                            if(response.message === 'userExists') {
+                                message = 'Böyle bir kullanıcı zaten var'
+                            } else {
+                                message = 'Teknik hata, lütfen daha sonra tekrar deneyiniz';
+                            }
+
+                            swal(
+                                'Oh, olamaz!',
+                                message,
+                                'error'
+                            );
+                        }
+                    }
+                })
+            },
             rules: {
                 'signup-username': {
                     required: true,
@@ -39,6 +74,11 @@ var OpAuthSignUp = function() {
                 },
                 'signup-terms': {
                     required: true
+                },
+                'signup-tc': {
+                    minlength: 11,
+                    maxlength: 11,
+                    required: true
                 }
             },
             messages: {
@@ -46,17 +86,18 @@ var OpAuthSignUp = function() {
                     required: 'Please enter a username',
                     minlength: 'Your username must consist of at least 3 characters'
                 },
-                'signup-email': 'Please enter a valid email address',
+                'signup-email': 'Lütfen geçerli bir e-posta adresi giriniz',
                 'signup-password': {
-                    required: 'Please provide a password',
-                    minlength: 'Your password must be at least 5 characters long'
+                    required: 'Lütfen şifre giriniz',
+                    minlength: 'Şifreniz beş haneden uzun olmalıdır'
                 },
                 'signup-password-confirm': {
-                    required: 'Please provide a password',
-                    minlength: 'Your password must be at least 5 characters long',
-                    equalTo: 'Please enter the same password as above'
+                    required: 'Lütfen şifrenizi tekrar giriniz',
+                    minlength: 'Şifre beş haneden uzun olmalıdır',
+                    equalTo: 'Şifreler eşleşmiyor'
                 },
-                'signup-terms': 'You must agree to the service terms!'
+                'signup-terms': 'Kullanım koşullarını kabul etmelisiniz!',
+                'signup-tc': 'Lütfen T.C. kimlik numaranızı doğru girdiğiniz emin olunuz',
             }
         });
     };
@@ -64,7 +105,7 @@ var OpAuthSignUp = function() {
     return {
         init: function () {
             // Init SignUp Form Validation
-            initValidationSignUp();
+            console.log(initValidationSignUp());
         }
     };
 }();
