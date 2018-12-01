@@ -40,7 +40,7 @@
                         <div class="col-12">
                             <div class="form-material floating">
                                 <input type="text" class="form-control" id="login-email" name="login-email">
-                                <label for="login-email">Kullanıcı Adı</label>
+                                <label for="login-email">E-Posta</label>
                             </div>
                         </div>
                     </div>

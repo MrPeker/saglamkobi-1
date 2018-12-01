@@ -40,10 +40,8 @@ var OpAuthSignIn = function() {
 
                         } else {
                             var message = '';
-                            if(response.message === 'wrongPassword') {
-                                message = 'Lütfen şifrenizi kontrol ediniz'
-                            } else if(response.message === 'userNotExists') {
-                                message = 'Böyle bir kullanıcı yok';
+                            if(response.message === 'wrongCredentials') {
+                                message = 'Lütfen bilgilerinizi kontrol ediniz'
                             } else {
                                 message = 'Teknik hata, lütfen daha sonra tekrar deneyiniz';
                             }
