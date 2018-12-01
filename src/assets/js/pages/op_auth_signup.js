@@ -30,7 +30,7 @@ var OpAuthSignUp = function() {
                         if(response.status) {
                             swal(
                                 'Harika iş!',
-                                'Başarıyla giriş yaptınız! Yönlendiriliyorsunuz...',
+                                'Başarıyla kayıt oldunuz! Yönlendiriliyorsunuz...',
                                 'success'
                             );
 
@@ -51,7 +51,6 @@ var OpAuthSignUp = function() {
                                 message,
                                 'error'
                             );
-                            $(e).lastChild('.form-group').addClass('is-invalid').append('Teknik bir sorun oluştu, lütfen daha sonra tekrar deneyiniz');;
                         }
                     }
                 })
