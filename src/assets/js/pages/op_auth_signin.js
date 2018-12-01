@@ -47,7 +47,7 @@ var OpAuthSignIn = function() {
                             }
 
                             swal(
-                                'Oh, olamaz!',
+                                'Ah, olamaz!',
                                 message,
                                 'error'
                             );
@@ -58,11 +58,11 @@ var OpAuthSignIn = function() {
             rules: {
                 'login-email': {
                     required: true,
-                    minlength: 3
+                    email: true,
                 },
                 'login-password': {
                     required: true,
-                    email: true
+                    minlength: 5
                 }
             },
             messages: {

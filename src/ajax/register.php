@@ -1,4 +1,5 @@
 <?php
+
 require 'config.php';
 if (!is_null($_POST["signup-ad"])) {
     $PName = $_POST["signup-ad"];
@@ -43,10 +44,15 @@ if (!is_null($_POST["signup-password"])) {
     die();
 }
 
-if ($db->query("Select COUNT(*) from Users where Tc='$PTC' and email='$PEmail'")->fetchColumn() > 0) {
+if ($db->query("Select COUNT(*) from Users where Tc='$PTC' OR email='$PEmail'")->fetchColumn() > 0) {
     echo json_encode(array("status" => False, "message" => "userExists"));
     die();
 }
-$stmt1 = $db->prepare("insert into Users (Name,Surname,Tc,Birthday,Phone,email,Password) values ('$PName','$PSurname','$PTC','$PBirthday','$PPhone','$PEmail','$PPassword')");
-$stmt1->execute();
+try {
+    echo "insert into users (name,surname,tc,birthday,phone,email,password) values ('$PName','$PSurname','$PTC','$PBirthday','$PPhone','$PEmail','$PPassword')";
+    $stmt1 = $db->prepare("insert into users (name,surname,tc,birthday,phone,email,password) values ('$PName','$PSurname','$PTC','$PBirthday','$PPhone','$PEmail','$PPassword')");
+    $stmt1->execute();
+} catch(Exception $e) {
+    var_dump($e);
+}
 echo json_encode(["status" => true]);
