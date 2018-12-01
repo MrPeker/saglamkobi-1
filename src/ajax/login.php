@@ -7,4 +7,5 @@ if($db->query("Select COUNT(*) from Users where Password='$PPassword' and email=
 	echo json_encode(array("status"=>False,"Message"=>"userDoesntExit"));
 	die();
 }
+$_SESSION['UserId'] = MySqlQuery("SELECT * FROM Users WHERE email= ? and Password= ?", array($PEmail,$PPassword), "OneValue","id");
 echo json_encode([ "status" => true ]);
