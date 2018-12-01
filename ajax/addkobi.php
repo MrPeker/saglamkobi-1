@@ -9,6 +9,6 @@ if($_POST) {
 
     require 'config.php';
 
-	MySqlQuery("INSERT INTO kobis (name,sector_id,type,status,needs,description,created_at,updated_at) values (?, ?, ?, ?, ?, ?, ?, ?)",array($name,$sector_id,$type,$status, $needs,$description,date("Y-m-d H:i:s"),date("Y-m-d H:i:s")));
+	MySqlQuery("INSERT INTO kobis (name,sector_id,type,status,needs,description,created_at,updated_at,user_id) values (?, ?, ?, ?, ?, ?, ?, ?,?)",array($name,$sector_id,$type,$status, $needs,$description,date("Y-m-d H:i:s"),date("Y-m-d H:i:s"),$_SESSION['id']));
 	echo json_encode(array('status' => true, "message" => 'kobiIsCreated'));
 }
