@@ -1,1 +1,0 @@
-# saglamkobi-1
