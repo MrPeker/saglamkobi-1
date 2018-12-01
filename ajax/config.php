@@ -1,6 +1,6 @@
 <?php
 /* Database Connect */
-$db = new PDO('mysql:host=127.0.0.1;dbname=hackathon', "root", "1234");
+$db = new PDO('mysql:host=localhost;dbname=hackhaton', "root", "Peacher01");
 
 function MySqlQuery($q, $params, $return = "", $TekSatir = "") {
   global $db;
@@ -19,6 +19,8 @@ function MySqlQuery($q, $params, $return = "", $TekSatir = "") {
 }
 
 if(!$_SESSION['login']) {
-	header('Location: /login.php');
+	if(strpos($_SERVER['REQUEST_URI'], "ajax") === False){
+		header('Location: /login.php');
+	}	
 }
 
