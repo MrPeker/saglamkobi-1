@@ -2,6 +2,8 @@
 
 <?php
 
+    require 'helpers/Sector.php';
+
     if(!$_SESSION['login']) {
         header('Location: /login.php');
     }
@@ -10,6 +12,7 @@
 
 <?php require 'inc/backend/config.php'; ?>
 <?php require 'inc/_global/views/head_start.php'; ?>
+<?php $cb->get_css('js/plugins/sweetalert2/sweetalert2.min.css'); ?>
 <?php require 'inc/_global/views/head_end.php'; ?>
 <?php require 'inc/_global/views/page_start.php'; ?>
 
@@ -23,7 +26,7 @@
                     <p class="mt-5">
                         <i class="fa fa-building fa-3x"></i>
                     </p>
-                    <p class="font-w600">Şirket Ekle</p>
+                    <p class="font-w600">İşletme Ekle</p>
                 </div>
             </a>
         </div>
@@ -33,7 +36,7 @@
                     <p class="mt-5">
                         <i class="fa fa-building fa-3x"></i>
                     </p>
-                    <p class="font-w600">Şirket Düzenle</p>
+                    <p class="font-w600">İşletme Düzenle</p>
                 </div>
             </a>
         </div>
@@ -128,7 +131,7 @@
             <div class="block block-themed block-transparent mb-0">
                 <div class="block-header">
                     <h3 class="block-title">
-                        <i class="fa fa-pencil mr-5"></i> Yeni Şirket
+                        <i class="fa fa-pencil mr-5"></i> Yeni İşletme
                     </h3>
                     <div class="block-options">
                         <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
@@ -137,50 +140,66 @@
                     </div>
                 </div>
                 <div class="block-content">
-                    <form class="my-10" action="be_pages_generic_inbox.php" method="post" onsubmit="return false;">
+                    <form class="my-10 js-validation-add-kobi" onsubmit="return false;">
                         <div class="form-group row">
                             <div class="col-12">
                                 <div class="form-material form-material-primary input-group">
-                                    <input type="text" class="form-control" id="message-isletme" name="message-isletme" placeholder="İşletme'nizin Adı">
-                                    <label for="message-isletme">İşletme Adı</label>
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">
-                                            <i class="fa fa-building"></i>
-                                        </span>
-                                    </div>
+                                    <input type="text" class="form-control" id="isletme-ismi" name="isletme-ismi" placeholder="İşletmenizin Adı">
+                                    <label for="isletme-ismi">İşletme Adı</label>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-12">
                                 <div class="form-material form-material-primary input-group">
-                                    <label for="message-kategori">İşletme Kategorisi</label>
-                                <select class="form-control" id="example-multiple-select" name="example-multiple-select" size="7" multiple>
-                                    <option value="1">Option #1</option>
-                                    <option value="2">Option #2</option>
-                                    <option value="3">Option #3</option>
-                                    <option value="4">Option #4</option>
-                                    <option value="5">Option #5</option>
-                                    <option value="6">Option #6</option>
-                                    <option value="7">Option #7</option>
-                                    <option value="8">Option #8</option>
-                                    <option value="9">Option #9</option>
-                                    <option value="10">Option #10</option>
-                                </select>
+                                    <label for="isletme-sektor">İşletmenizin Sektörü</label>
+                                    <select class="form-control" id="example-multiple-select" name="isletme-sektor" size="7" multiple>
+                                        <?php
+
+                                            $sectors = SectorHelper::getSectors();
+                                            foreach($sectors as $sector):
+                                        ?>
+                                        <option value="<?=$sector['id']?>"><?=$sector['name']?></option>
+                                        <?php endforeach; ?>
+                                    </select>
                              </div>
                           </div>
 						</div>
                         <div class="form-group row">
                             <div class="col-12">
-                                <div class="form-material form-material-primary">
-                                    <textarea class="form-control" id="message-msg" name="message-msg" rows="6" placeholder="Tüm Kobi'lere İleteceğiniz Mesajı Giriniz..."></textarea>
-                                    <label for="message-msg">Açıklama</label>
+                                <div class="form-material form-material-primary input-group">
+                                    <input type="text" class="form-control" id="isletme-turu" name="isletme-turu" placeholder="İşletmenizin Türü (Bakkal, Fırın, Beyaz Eşya Satıcısı)">
+                                    <label for="isletme-turu">İşletmenizin Türü</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <div class="form-material form-material-primary input-group">
+                                    <input type="text" class="form-control" id="isletme-durumu" name="isletme-durumu" placeholder="İşletmenizin Durumu (Normal, Zarar Gördü, Kullanılamaz Halde)">
+                                    <label for="isletme-durumu">İşletmenizin Durumu</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <div class="form-material form-material-primary input-group">
+                                    <input type="text" class="form-control" id="isletme-ihtiyac-durumu" name="isletme-ihtiyac-durumu" placeholder="İşletmenizin İhtiyaç Durumu (Eleman, Sermaye, Tedarikçi)">
+                                    <label for="isletme-ihtiyac-durumu">İşletmenizin İhtiyaç Durumu</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <div class="form-material form-material-primary input-group">
+                                    <textarea type="text" class="form-control" id="isletme-aciklama" name="isletme-aciklama" placeholder="Açıklama..."></textarea>
+                                    <label for="isletme-aciklama">Açıklama</label>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <button type="button" class="btn btn-alt-primary" data-dismiss="modal">
-                                <i class="fa fa-send mr-5"></i> Şirket Ekle
+                            <button type="button" class="btn btn-alt-primary" data-dismiss="modal" onclick="addKobi(this);">
+                                <i class="fa fa-send mr-5"></i> İşletme Ekle
                             </button>
                             <button type="button" class="btn btn-alt-secondary" data-dismiss="modal">İptal</button>
                         </div>
@@ -191,7 +210,6 @@
     </div>
 </div>
 
-
 <!-- Compose Modal -->
 <div class="modal fade" id="modal-compose2" tabindex="-2" role="dialog" aria-labelledby="modal-compose2" aria-hidden="true">
     <div class="modal-dialog modal-dialog-top" role="document">
@@ -199,7 +217,7 @@
             <div class="block block-themed block-transparent mb-0">
                 <div class="block-header">
                     <h3 class="block-title">
-                        <i class="fa fa-pencil mr-5"></i> Şirket Düzenle
+                        <i class="fa fa-pencil mr-5"></i> İşletme Düzenle
                     </h3>
                     <div class="block-options">
                         <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
@@ -273,6 +291,15 @@
         Codebase.helpers('table-tools');
     });
 </script>
+
+<!-- Page JS Plugins -->
+<?php $cb->get_js('js/plugins/jquery-validation/jquery.validate.min.js'); ?>
+
+<?php $cb->get_js('js/plugins/sweetalert2/sweetalert2.min.js'); ?>
+
+<!-- Page JS Code -->
+<?php $cb->get_js('js/pages/index.js'); ?>
+
 
 <!-- Page JS Code -->
 <?php $cb->get_js('js/pages/be_pages_dashboard.js'); ?>
