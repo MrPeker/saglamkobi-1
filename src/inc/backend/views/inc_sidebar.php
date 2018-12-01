@@ -61,21 +61,22 @@
             <!-- END Side Header -->
 
             <!-- Side User -->
-            <div class="content-side content-side-full content-side-user px-10 align-parent">
+            <div class="content-side content-side-full px-10 align-parent">
                 <!-- Visible only in mini mode -->
-                <div class="sidebar-mini-visible-b align-v animated fadeIn">
+                <!--<div class="sidebar-mini-visible-b align-v animated fadeIn">
                     <?php $cb->get_avatar('15', '', 32); ?>
                 </div>
                 <!-- END Visible only in mini mode -->
 
                 <!-- Visible only in normal mode -->
                 <div class="sidebar-mini-hidden-b text-center">
-                    <a class="img-link" href="be_pages_generic_profile.php">
+                    <!--<a class="img-link" href="be_pages_generic_profile.php">
                         <?php $cb->get_avatar('15'); ?>
                     </a>
+                    -->
                     <ul class="list-inline mt-10">
                         <li class="list-inline-item">
-                            <a class="link-effect text-dual-primary-dark font-size-xs font-w600 text-uppercase" href="be_pages_generic_profile.php">J. Smith</a>
+                            <a class="link-effect text-dual-primary-dark font-size-xs font-w600 text-uppercase" href="be_pages_generic_profile.php"><?=substr($_SESSION['name'], 0, 1)?>. <?=$_SESSION['surname']?></a>
                         </li>
                         <li class="list-inline-item">
                             <!-- Layout API, functionality initialized in Codebase() -> uiApiLayout() -->
@@ -84,7 +85,7 @@
                             </a>
                         </li>
                         <li class="list-inline-item">
-                            <a class="link-effect text-dual-primary-dark" href="op_auth_signin.php">
+                            <a class="link-effect text-dual-primary-dark" href="logout.php">
                                 <i class="si si-logout"></i>
                             </a>
                         </li>
