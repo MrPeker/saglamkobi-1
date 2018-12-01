@@ -389,22 +389,24 @@ class Template {
      *
      * @return string  Returns the generated tag if $print is set to false
      */
-    public function get_tag($print = true, $status = false) {
+    public function get_tag($value, $print = true, $status = false) {
         // Tag seed data
         $data = array(
-            '0' => array('class' => 'success', 'text'  => 'VIP'),
-            '1' => array('class' => 'info', 'text'  => 'Business'),
-            '2' => array('class' => 'primary', 'text'  => 'Personal'),
-            '3' => array('class' => 'warning', 'text'  => 'Trial'),
-            '4' => array('class' => 'danger', 'text'  => 'Disabled'),
-            '5' => array('class' => 'success', 'text'  => 'Completed'),
-            '6' => array('class' => 'info', 'text'  => 'Processing'),
-            '7' => array('class' => 'warning', 'text'  => 'Pending'),
-            '8' => array('class' => 'danger', 'text'  => 'Canceled')
+            '0' => array('class' => 'info', 'text'  => '%0'),
+            '10' => array('class' => 'info', 'text'  => '%10'),
+            '20' => array('class' => 'success', 'text'  => '%20'),
+            '30' => array('class' => 'success', 'text'  => '%30'),
+            '40' => array('class' => 'success', 'text'  => '%40'),
+            '50' => array('class' => 'warning', 'text'  => '%50'),
+            '60' => array('class' => 'warning', 'text'  => '%60'),
+            '70' => array('class' => 'warning', 'text'  => '%70'),
+            '80' => array('class' => 'danger', 'text'  => '%80'),
+            '90' => array('class' => 'danger', 'text'  => '%90'),
+            '100' => array('class' => 'danger', 'text'  => '%100'),
         );
 
         // Generate tag
-        $rand = $status ? rand(5, 8) : rand(0, 4);
+        $rand = $value;
         $tag  = '<span class="badge badge-' . $data[$rand]['class'] . '">' . $data[$rand]['text'] . '</span>'. "\n";
 
         // Print or return generated tag

@@ -1,16 +1,32 @@
 <?php require 'inc/_global/config.php'; ?>
-<?php include("ajax/Main.php"); ?>
+<?php include("ajax/config.php"); ?>
 <?php require 'inc/backend/config.php'; ?>
 <?php require 'inc/_global/views/head_start.php'; ?>
 <?php $cb->get_css('js/plugins/sweetalert2/sweetalert2.min.css'); ?>
+<?php $cb->get_css('js/plugins/ion-rangeslider/css/ion.rangeSlider.min.css'); ?>
+<?php $cb->get_css('js/plugins/ion-rangeslider/css/ion.rangeSlider.skinHTML5.min.css'); ?>
 <?php require 'inc/_global/views/head_end.php'; ?>
 <?php require 'inc/_global/views/page_start.php'; ?>
 
+<?php $fetch = MySqlQuery('SELECT * FROM kobis WHERE user_id=?', [$_SESSION['id']], 'rows', 0); ?>
+
+    <style>
+        .select {
+            width: 100%;
+            margin-top: 6px;
+            border: none;
+            -webkit-border-radius: none;
+            -moz-border-radius: none;
+            border-radius: none;
+        }
+    </style>
+
 <!-- Page Content -->
-<div class="content">
+<div class="content" style="">
     <div class="row gutters-tiny invisible" data-toggle="appear">
         <!-- Row #5 -->
-        <div class="col-6 col-md-4 col-xl-2">
+        <?php if(empty($fetch)): ?>
+        <div class="col-12 col-md-12 col-xl-12">
             <a class="block block-link-shadow text-center" data-toggle="modal" data-target="#modal-compose">
                 <div class="block-content ribbon ribbon-bookmark ribbon-success ribbon-left">
                     <p class="mt-5">
@@ -20,99 +36,67 @@
                 </div>
             </a>
         </div>
-	<div class="col-6 col-md-4 col-xl-2">
-            <a class="block block-link-shadow text-center" data-toggle="modal" data-target="#modal-compose2">
-                <div class="block-content ribbon ribbon-bookmark ribbon-success ribbon-left">
-                    <p class="mt-5">
-                        <i class="fa fa-building fa-3x"></i>
-                    </p>
-                    <p class="font-w600">İşletme Düzenle</p>
-                </div>
-            </a>
+        <?php else: ?>
+        <div class="col-12 col-md-12 col-xl-12">
+                <a class="block block-link-shadow text-center" data-toggle="modal" data-target="#modal-compose2">
+                    <div class="block-content ribbon ribbon-bookmark ribbon-success ribbon-left">
+                        <p class="mt-5">
+                            <i class="fa fa-building fa-3x"></i>
+                        </p>
+                        <p class="font-w600">İşletme Düzenle</p>
+                    </div>
+                </a>
+            </div>
         </div>
-    </div>
-	<div class="row gutters-tiny invisible" data-toggle="appear">
+        <?php endif; ?>
+	<div class="col-12 col-md-12 col-xl-12 gutters-tiny invisible" data-toggle="appear" style="background: white;">
 		<!-- If you put a checkbox in thead section, it will automatically toggle all tbody section checkboxes -->
-<table class="js-table-checkable table table-hover">
+<table class="js-table-checkable table table-hover col-12 col-md-12 col-xl-12" style="width: 100%;">
                 <thead>
                     <tr>
 
-                        <th>Name</th>
-                        <th class="d-none d-sm-table-cell" style="width: 15%;">Access</th>
-                        <th class="d-none d-sm-table-cell" style="width: 20%;">Date</th>
+                        <th>KOBİ</th>
+                        <th class="d-none d-sm-table-cell" style="width: 20%;">Sektör</th>
+                        <th class="d-none d-sm-table-cell" style="width: 20%;">İhtiyaç</th>
+                        <th class="d-none d-sm-table-cell" style="width: 15%;">Hasar</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php for ($i = 1; $i < 6; $i++) { ?>
+                    <?php
+                        $kobis = MySqlQuery('SELECT * FROM kobis WHERE user_id != ?', [$_SESSION['id']], 'rows', 0);
+                        foreach ($kobis as $kobi) {
+                    ?>
                     <tr>
                         <td>
-                            <p class="font-w600 mb-10"><?php $cb->get_name(); ?></p>
-                            <p class="text-muted mb-0">Customer details and further information</p>
+                            <p class="font-w600 mb-10"><?php echo $kobi['name']; ?> (<?php $u = MySqlQuery('SELECT * FROM users WHERE id=?', [$kobi['user_id']], 'rows', 0); echo substr($u[0]['name'], 0, 1) . '. ' . $u[0]['surname']; ?>)</p>
+                            <p class="text-muted mb-0"><?=substr($kobi['description'], 0, 60)?><?php if($kobi['description'] > 60) echo '...'; ?></p>
                         </td>
                         <td class="d-sm-table-cell">
-                            <?php $cb->get_tag(); ?>
+                            <em class="text-muted">
+                                <?=$kobi['type']?>, <?php $query = MySqlQuery('SELECT * FROM sectors WHERE id=?',  [$kobi['sector_id']], 'rows', 0); echo $query[0]['name']; ?>
+                            </em>
                         </td>
                         <td class="d-sm-table-cell">
-                            <em class="text-muted">November <?php echo rand(1, 28); ?>, 2017 13:17</em>
+                            <?php echo $kobi['needs']; ?>
+                        </td>
+                        <td class="d-sm-table-cell">
+                            <?php $cb->get_tag($kobi['status']); ?>
                         </td>
                     </tr>
                     <?php } ?>
                 </tbody>
             </table>
 	</div>
-    <div class="row gutters-tiny invisible" data-toggle="appear">
-        <!-- Row #4 -->
-        <div class="col-md-6">
-            <a class="block block-link-shadow overflow-hidden" href="javascript:void(0)">
-                <div class="block-content block-content-full">
-                    <i class="si si-briefcase fa-2x text-body-bg-dark"></i>
-                    <div class="row py-20">
-                        <div class="col-6 text-right border-r">
-                            <div class="invisible" data-toggle="appear" data-class="animated fadeInLeft">
-                                <div class="font-size-h3 font-w600">16</div>
-                                <div class="font-size-sm font-w600 text-uppercase text-muted">Projeler</div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="invisible" data-toggle="appear" data-class="animated fadeInRight">
-                                <div class="font-size-h3 font-w600">2</div>
-                                <div class="font-size-sm font-w600 text-uppercase text-muted">Aktif</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="col-md-6">
-            <a class="block block-link-shadow overflow-hidden" href="javascript:void(0)">
-                <div class="block-content block-content-full">
-                    <div class="text-right">
-                        <i class="si si-users fa-2x text-body-bg-dark"></i>
-                    </div>
-                    <div class="row py-20">
-                        <div class="col-6 text-right border-r">
-                            <div class="invisible" data-toggle="appear" data-class="animated fadeInLeft">
-                                <div class="font-size-h3 font-w600 text-info">63250</div>
-                                <div class="font-size-sm font-w600 text-uppercase text-muted">Kayıt</div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="invisible" data-toggle="appear" data-class="animated fadeInRight">
-                                <div class="font-size-h3 font-w600 text-success">97%</div>
-                                <div class="font-size-sm font-w600 text-uppercase text-muted">Aktif</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <!-- END Row #4 -->
-    </div>
-
 </div>
 <!-- END Page Content -->
 
 <?php require 'inc/_global/views/page_end.php'; ?>
+
+<?php
+
+if(empty($fetch)):
+
+?>
 
 <!-- Compose Modal -->
 <div class="modal fade" id="modal-compose" tabindex="-1" role="dialog" aria-labelledby="modal-compose" aria-hidden="true">
@@ -199,75 +183,103 @@
     </div>
 </div>
 
-<!-- Compose Modal -->
-<div class="modal fade" id="modal-compose2" tabindex="-2" role="dialog" aria-labelledby="modal-compose2" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-top" role="document">
-        <div class="modal-content">
-            <div class="block block-themed block-transparent mb-0">
-                <div class="block-header">
-                    <h3 class="block-title">
-                        <i class="fa fa-pencil mr-5"></i> İşletme Düzenle
-                    </h3>
-                    <div class="block-options">
-                        <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
-                            <i class="si si-close"></i>
-                        </button>
+<?php else: ?>
+
+    <!-- Compose Modal -->
+    <div class="modal fade" id="modal-compose2" tabindex="-1" role="dialog" aria-labelledby="modal-compose" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-top" role="document">
+            <div class="modal-content">
+                <div class="block block-themed block-transparent mb-0">
+                    <div class="block-header">
+                        <h3 class="block-title">
+                            <i class="fa fa-pencil mr-5"></i> İşletme Düzenle
+                        </h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                                <i class="si si-close"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="block-content">
-                    <form class="my-10" action="be_pages_generic_inbox.php" method="post" onsubmit="return false;">
-                        <div class="form-group row">
-                            <div class="col-12">
-                                <div class="form-material form-material-primary input-group">
-                                    <input type="text" class="form-control" id="message-isletme" name="message-isletme" placeholder="İşletme'nizin Adı">
-                                    <label for="message-isletme">İşletme Adı</label>
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">
-                                            <i class="fa fa-building"></i>
-                                        </span>
+                    <div class="block-content">
+                        <form class="my-10 js-validation-add-kobi" onsubmit="return false;">
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <div class="form-material form-material-primary input-group">
+                                        <input type="text" class="form-control" id="isletme-ismi" value="<?=$fetch[0]['name']?>" name="isletme-ismi" placeholder="İşletmenizin Adı">
+                                        <label for="isletme-ismi">İşletme Adı</label>
+                                        <input type="hidden" value="<?=$fetch[0]['id']?>" name="id">
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-12">
-                                <div class="form-material form-material-primary input-group">
-                                    <label for="message-kategori">İşletme Kategorisi</label>
-                                <select class="form-control" id="example-multiple-select" name="example-multiple-select" size="7" multiple>
-                                    <option value="1">Option #1</option>
-                                    <option value="2">Option #2</option>
-                                    <option value="3">Option #3</option>
-                                    <option value="4">Option #4</option>
-                                    <option value="5">Option #5</option>
-                                    <option value="6">Option #6</option>
-                                    <option value="7">Option #7</option>
-                                    <option value="8">Option #8</option>
-                                    <option value="9">Option #9</option>
-                                    <option value="10">Option #10</option>
-                                </select>
-                             </div>
-                          </div>
-						</div>
-                        <div class="form-group row">
-                            <div class="col-12">
-                                <div class="form-material form-material-primary">
-                                    <textarea class="form-control" id="message-msg" name="message-msg" rows="6" placeholder="Tüm Kobi'lere İleteceğiniz Mesajı Giriniz..."></textarea>
-                                    <label for="message-msg">Açıklama</label>
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <div class="form-material form-material-primary input-group">
+                                        <label for="isletme-sektor">İşletmenizin Sektörü</label>
+                                        <select class="form-control" id="example-multiple-select" name="isletme-sektor" size="7" multiple>
+                                            <?php
+                                            $sectors = $db->query('SELECT * FROM sectors')->fetchAll();
+                                            foreach($sectors as $sector):
+                                                ?>
+                                                <option <?=$sector['id'] === $fetch[0]['sector_id'] ? 'selected' : ''?> value="<?=$sector['id']?>"><?=$sector['name']?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-alt-primary" data-dismiss="modal">
-                                <i class="fa fa-send mr-5"></i> Kaydet
-                            </button>
-                            <button type="button" class="btn btn-alt-secondary" data-dismiss="modal">İptal</button>
-                        </div>
-                    </form>
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <div class="form-material form-material-primary input-group">
+                                        <input type="text" class="form-control" id="isletme-turu" value="<?=$fetch[0]['type']?>" name="isletme-turu" placeholder="İşletmenizin Türü (Bakkal, Fırın, Beyaz Eşya Satıcısı)">
+                                        <label for="isletme-turu">İşletmenizin Türü</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <div class="form-material form-material-primary input-group">
+                                        <div class="col-md-12 col-12">
+                                            <input type="text" class="js-rangeslider" data-prefix="%" id="isletme-durumu" name="isletme-durumu" value="50" data-grid="true" data-step="10" data-min="0" data-max="100">
+                                        </div>
+                                        
+                                        <label for="isletme-durumu">İşletmenizin Hasarı</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <div class="form-material form-material-primary input-group">
+                                        <select class="select" name="isletme-ihtiyac-durumu" id="isletme-ihtiyac-durumu">
+                                            <option value="Eleman">Eleman</option>
+                                            <option value="Sermaye">Sermaye</option>
+                                            <option value="Tedarikçi">Tedarikçi</option>
+                                        </select>
+                                        <label for="isletme-ihtiyac-durumu">İşletmenizin İhtiyaç Durumu</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <div class="form-material form-material-primary input-group">
+                                        <textarea type="text" class="form-control" id="isletme-aciklama" name="isletme-aciklama" placeholder="Belirtmek istediğiniz diğer şeyleri yazın..."><?=$fetch[0]['description']?></textarea>
+                                        <label for="isletme-aciklama">Açıklama</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-alt-primary" data-dismiss="modal" onclick="updateKobi(this);">
+                                    <i class="fa fa-send mr-5"></i> Kaydet
+                                </button>
+                                <button type="button" class="btn btn-alt-secondary" data-dismiss="modal">İptal</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+<?php endif; ?>
+
 <?php require 'inc/_global/views/footer_start.php'; ?>
 
 <!-- Page JS Plugins -->
@@ -281,6 +293,7 @@
     });
 </script>
 
+<?php $cb->get_js('js/plugins/ion-rangeslider/js/ion.rangeSlider.min.js'); ?>
 <!-- Page JS Plugins -->
 <?php $cb->get_js('js/plugins/jquery-validation/jquery.validate.min.js'); ?>
 
@@ -289,8 +302,14 @@
 <!-- Page JS Code -->
 <?php $cb->get_js('js/pages/index.js'); ?>
 
-
 <!-- Page JS Code -->
 <?php $cb->get_js('js/pages/be_pages_dashboard.js'); ?>
 
 <?php require 'inc/_global/views/footer_end.php'; ?>
+
+<script>
+    jQuery(function () {
+        // Init page helpers (BS Datepicker + BS Colorpicker + BS Maxlength + Select2 + Masked Input + Range Sliders + Tags Inputs plugins)
+        Codebase.helpers(['rangeslider']);
+    });
+</script>

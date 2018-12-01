@@ -75,7 +75,7 @@
                     </a>
                     <ul class="list-inline mt-10">
                         <li class="list-inline-item">
-                            <a class="link-effect text-dual-primary-dark font-size-xs font-w600 text-uppercase" href="be_pages_generic_profile.php">J. Smith</a>
+                            <a class="link-effect text-dual-primary-dark font-size-xs font-w600 text-uppercase" href="be_pages_generic_profile.php"><?=substr($_SESSION['name'], 0, 1)?>. <?=$_SESSION['surname']?></a>
                         </li>
                         <li class="list-inline-item">
                             <!-- Layout API, functionality initialized in Codebase() -> uiApiLayout() -->
