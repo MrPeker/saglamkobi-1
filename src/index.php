@@ -1,4 +1,13 @@
 <?php require 'inc/_global/config.php'; ?>
+
+<?php
+
+    if(!$_SESSION['login']) {
+        header('Location: /login.php');
+    }
+
+?>
+
 <?php require 'inc/backend/config.php'; ?>
 <?php require 'inc/_global/views/head_start.php'; ?>
 <?php require 'inc/_global/views/head_end.php'; ?>

@@ -1,4 +1,13 @@
 <?php require 'inc/_global/config.php'; ?>
+
+<?php
+
+if($_SESSION['login']) {
+    header('Location: /index.php');
+}
+
+?>
+
 <?php require 'inc/_global/views/head_start.php'; ?>
 
 <?php $cb->get_css('js/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css'); ?>
