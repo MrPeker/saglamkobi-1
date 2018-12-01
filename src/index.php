@@ -1,6 +1,7 @@
 <?php require 'inc/_global/config.php'; ?>
 
 <?php
+<<<<<<< HEAD
 	include("ajax/config.php");
 
 	
@@ -8,6 +9,13 @@
         if(!$_SESSION['login']) {
             header('Location: /login.php');
         }
+=======
+
+    require 'helpers/Sector.php';
+
+    if(!$_SESSION['login']) {
+        header('Location: /login.php');
+>>>>>>> parent of 4d4a55b... aaaa\
     }
 
 ?>
