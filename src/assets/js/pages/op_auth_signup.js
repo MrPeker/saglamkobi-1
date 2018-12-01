@@ -28,9 +28,29 @@ var OpAuthSignUp = function() {
                     success: function(response) {
                         response = JSON.parse(response);
                         if(response.status) {
-                            location.href = '/index.php';
+                            swal(
+                                'Harika iş!',
+                                'Başarıyla kayıt oldunuz! Yönlendiriliyorsunuz...',
+                                'success'
+                            );
+
+                            setTimeout(function(){
+                                location.href = '/index.php';
+                            }, 2200);
+
                         } else {
-                            $(e).lastChild('.form-group').addClass('is-invalid').append('Teknik bir sorun oluştu, lütfen daha sonra tekrar deneyiniz');;
+                            var message = '';
+                            if(response.message === 'userExists') {
+                                message = 'Böyle bir kullanıcı zaten var'
+                            } else {
+                                message = 'Teknik hata, lütfen daha sonra tekrar deneyiniz';
+                            }
+
+                            swal(
+                                'Ah, olamaz!',
+                                message,
+                                'error'
+                            );
                         }
                     }
                 })

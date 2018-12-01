@@ -1,10 +1,20 @@
 <?php require 'inc/_global/config.php'; ?>
+
+<?php
+
+if($_SESSION['login']) {
+    header('Location: /index.php');
+}
+
+?>
+
 <?php require 'inc/_global/views/head_start.php'; ?>
 
 <?php $cb->get_css('js/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css'); ?>
 <?php $cb->get_css('js/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css'); ?>
 <?php $cb->get_css('js/plugins/select2/select2.min.css'); ?>
 <?php $cb->get_css('js/plugins/select2/select2-bootstrap.min.css'); ?>
+<?php $cb->get_css('js/plugins/sweetalert2/sweetalert2.min.css'); ?>
 <?php $cb->get_css('js/plugins/jquery-tags-input/jquery.tagsinput.min.css'); ?>
 <?php $cb->get_css('js/plugins/jquery-auto-complete/jquery.auto-complete.min.css'); ?>
 <?php $cb->get_css('js/plugins/ion-rangeslider/css/ion.rangeSlider.min.css'); ?>
@@ -177,6 +187,7 @@
 <?php $cb->get_js('js/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js'); ?>
 <?php $cb->get_js('js/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js'); ?>
 <?php $cb->get_js('js/plugins/select2/select2.full.min.js'); ?>
+<?php $cb->get_js('js/plugins/sweetalert2/sweetalert2.min.js'); ?>
 <?php $cb->get_js('js/plugins/jquery-tags-input/jquery.tagsinput.min.js'); ?>
 <?php $cb->get_js('js/plugins/jquery-auto-complete/jquery.auto-complete.min.js'); ?>
 <?php $cb->get_js('js/plugins/masked-inputs/jquery.maskedinput.min.js'); ?>

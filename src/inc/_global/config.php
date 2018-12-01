@@ -7,6 +7,8 @@
  * Codebase - Global configuration file
  *
  */
+ob_start();
+session_start();
 
 // Include required classes
 require 'inc/_classes/Template.php';
@@ -27,8 +29,8 @@ $cb                             = new Template('Codebase', '2.0', 'assets');
 //                              : The data is added in the <head> section of the page
 $cb->author                     = 'pixelcave';
 $cb->robots                     = 'noindex, nofollow';
-$cb->title                      = 'Codebase - Bootstrap 4 Admin Template &amp; UI Framework';
-$cb->description                = 'Codebase - Bootstrap 4 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest';
+$cb->title                      = 'Sağlam Kobi Platformu';
+$cb->description                = 'Sağlam Kobi Platformu ile KOBİ\'nizi güçlendirin, geleceğe hazırlayın ve doğal afetlere karşı önlem alın.';
 
 //                              : The url of your site, used in Open Graph Meta Data (eg 'https://example.com')
 $cb->og_url_site                = '';
