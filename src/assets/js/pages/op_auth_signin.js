@@ -20,45 +20,10 @@ var OpAuthSignIn = function() {
                 jQuery(e).closest('.form-group').removeClass('is-invalid');
                 jQuery(e).remove();
             },
-            submitHandler: function(e) {
-                $.ajax({
-                    url: '/ajax/login.php',
-                    method: 'POST',
-                    data: $(e).serialize(),
-                    success: function(response) {
-                        response = JSON.parse(response);
-                        if(response.status) {
-                            swal(
-                                'Harika iş!',
-                                'Başarıyla giriş yaptınız! Yönlendiriliyorsunuz...',
-                                'success'
-                            );
-
-                            setTimeout(function(){
-                                location.href = '/index.php';
-                            }, 2200);
-
-                        } else {
-                            var message = '';
-                            if(response.message === 'wrongCredentials') {
-                                message = 'Lütfen bilgilerinizi kontrol ediniz'
-                            } else {
-                                message = 'Teknik hata, lütfen daha sonra tekrar deneyiniz';
-                            }
-
-                            swal(
-                                'Ah, olamaz!',
-                                message,
-                                'error'
-                            );
-                        }
-                    }
-                })
-            },
             rules: {
-                'login-email': {
+                'login-username': {
                     required: true,
-                    email: true,
+                    minlength: 3
                 },
                 'login-password': {
                     required: true,
@@ -66,13 +31,13 @@ var OpAuthSignIn = function() {
                 }
             },
             messages: {
-                'login-email': {
-                    required: 'Lütfen email adresinizi giriniz',
-                    email: 'Lütfen geçerli bir e-posta adresi giriniz'
+                'login-username': {
+                    required: 'Please enter a username',
+                    minlength: 'Your username must consist of at least 3 characters'
                 },
                 'login-password': {
-                    required: 'Lütfen şifrenizi giriniz',
-                    minlength: 'Şifreniz en az beş karakter olmalıdır'
+                    required: 'Please provide a password',
+                    minlength: 'Your password must be at least 5 characters long'
                 }
             }
         });

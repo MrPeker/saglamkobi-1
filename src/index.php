@@ -27,6 +27,16 @@
                 </div>
             </a>
         </div>
+	<div class="col-6 col-md-4 col-xl-2">
+            <a class="block block-link-shadow text-center" data-toggle="modal" data-target="#modal-compose2">
+                <div class="block-content ribbon ribbon-bookmark ribbon-success ribbon-left">
+                    <p class="mt-5">
+                        <i class="fa fa-building fa-3x"></i>
+                    </p>
+                    <p class="font-w600">Şirket Düzenle</p>
+                </div>
+            </a>
+        </div>
     </div>
 	<div class="row gutters-tiny invisible" data-toggle="appear">
 		<!-- If you put a checkbox in thead section, it will automatically toggle all tbody section checkboxes -->
@@ -131,7 +141,7 @@
                         <div class="form-group row">
                             <div class="col-12">
                                 <div class="form-material form-material-primary input-group">
-                                    <input type="text" class="form-control" id="message-isletme" name="message-isletme" placeholder="Company Name">
+                                    <input type="text" class="form-control" id="message-isletme" name="message-isletme" placeholder="İşletme'nizin Adı">
                                     <label for="message-isletme">İşletme Adı</label>
                                     <div class="input-group-append">
                                         <span class="input-group-text">
@@ -181,6 +191,76 @@
     </div>
 </div>
 
+
+<!-- Compose Modal -->
+<div class="modal fade" id="modal-compose2" tabindex="-2" role="dialog" aria-labelledby="modal-compose2" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-top" role="document">
+        <div class="modal-content">
+            <div class="block block-themed block-transparent mb-0">
+                <div class="block-header">
+                    <h3 class="block-title">
+                        <i class="fa fa-pencil mr-5"></i> Şirket Düzenle
+                    </h3>
+                    <div class="block-options">
+                        <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                            <i class="si si-close"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="block-content">
+                    <form class="my-10" action="be_pages_generic_inbox.php" method="post" onsubmit="return false;">
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <div class="form-material form-material-primary input-group">
+                                    <input type="text" class="form-control" id="message-isletme" name="message-isletme" placeholder="İşletme'nizin Adı">
+                                    <label for="message-isletme">İşletme Adı</label>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-building"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <div class="form-material form-material-primary input-group">
+                                    <label for="message-kategori">İşletme Kategorisi</label>
+                                <select class="form-control" id="example-multiple-select" name="example-multiple-select" size="7" multiple>
+                                    <option value="1">Option #1</option>
+                                    <option value="2">Option #2</option>
+                                    <option value="3">Option #3</option>
+                                    <option value="4">Option #4</option>
+                                    <option value="5">Option #5</option>
+                                    <option value="6">Option #6</option>
+                                    <option value="7">Option #7</option>
+                                    <option value="8">Option #8</option>
+                                    <option value="9">Option #9</option>
+                                    <option value="10">Option #10</option>
+                                </select>
+                             </div>
+                          </div>
+						</div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <div class="form-material form-material-primary">
+                                    <textarea class="form-control" id="message-msg" name="message-msg" rows="6" placeholder="Tüm Kobi'lere İleteceğiniz Mesajı Giriniz..."></textarea>
+                                    <label for="message-msg">Açıklama</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-alt-primary" data-dismiss="modal">
+                                <i class="fa fa-send mr-5"></i> Kaydet
+                            </button>
+                            <button type="button" class="btn btn-alt-secondary" data-dismiss="modal">İptal</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <?php require 'inc/_global/views/footer_start.php'; ?>
 
 <!-- Page JS Plugins -->
