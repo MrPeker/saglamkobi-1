@@ -2,10 +2,12 @@
 
 <?php
 	include("ajax/config.php");
-   
+
 	
-    if(!$_SESSION['login']) {
-        header('Location: /login.php');
+    if(isset($_SESSION['login'])) {
+        if(!$_SESSION['login']) {
+            header('Location: /login.php');
+        }
     }
 
 ?>
@@ -18,7 +20,7 @@
 
 <!-- Page Content -->
 <div class="content">
-    <div class="row gutters-tiny invisible" data-toggle="appear">
+    <div class="row gutters-tiny" data-toggle="appear">
         <!-- Row #5 -->
         <div class="col-6 col-md-4 col-xl-2">
             <a class="block block-link-shadow text-center" data-toggle="modal" data-target="#modal-compose">
@@ -41,7 +43,7 @@
             </a>
         </div>
     </div>
-	<div class="row gutters-tiny invisible" data-toggle="appear">
+	<div class="row gutters-tiny" data-toggle="appear">
 		<!-- If you put a checkbox in thead section, it will automatically toggle all tbody section checkboxes -->
 <table class="js-table-checkable table table-hover">
                 <thead>
@@ -70,7 +72,7 @@
                 </tbody>
             </table>
 	</div>
-    <div class="row gutters-tiny invisible" data-toggle="appear">
+    <div class="row gutters-tiny" data-toggle="appear">
         <!-- Row #4 -->
         <div class="col-md-6">
             <a class="block block-link-shadow overflow-hidden" href="javascript:void(0)">
@@ -78,13 +80,13 @@
                     <i class="si si-briefcase fa-2x text-body-bg-dark"></i>
                     <div class="row py-20">
                         <div class="col-6 text-right border-r">
-                            <div class="invisible" data-toggle="appear" data-class="animated fadeInLeft">
+                            <div class="" data-toggle="appear" data-class="animated fadeInLeft">
                                 <div class="font-size-h3 font-w600">16</div>
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">Projeler</div>
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="invisible" data-toggle="appear" data-class="animated fadeInRight">
+                            <div class="" data-toggle="appear" data-class="animated fadeInRight">
                                 <div class="font-size-h3 font-w600">2</div>
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">Aktif</div>
                             </div>
@@ -101,13 +103,13 @@
                     </div>
                     <div class="row py-20">
                         <div class="col-6 text-right border-r">
-                            <div class="invisible" data-toggle="appear" data-class="animated fadeInLeft">
+                            <div class="" data-toggle="appear" data-class="animated fadeInLeft">
                                 <div class="font-size-h3 font-w600 text-info">63250</div>
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">Kayıt</div>
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="invisible" data-toggle="appear" data-class="animated fadeInRight">
+                            <div class="" data-toggle="appear" data-class="animated fadeInRight">
                                 <div class="font-size-h3 font-w600 text-success">97%</div>
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">Aktif</div>
                             </div>
