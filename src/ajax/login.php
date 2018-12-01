@@ -9,6 +9,7 @@ if(empty($user[0])){
 	echo json_encode(array("status"=>False,"message"=>"wrongCredentials"));
 	die();
 } else {
+    $user = $user[0];
     $_SESSION['id'] = $user['id'];
     $_SESSION['name'] = $user['name'];
     $_SESSION['surname'] = $user['surname'];

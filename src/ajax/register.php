@@ -53,12 +53,12 @@ try {
     $stmt1 = $db->prepare("insert into users (name,surname,tc,birthday,phone,email,password) values ('$PName','$PSurname','$PTC','$PBirthday','$PPhone','$PEmail','$PPassword')");
     if($stmt1->execute()) {
         $_SESSION['id'] = $db->lastInsertId();
-        $_SESSION['name'] = $_POST['name'];
-        $_SESSION['surname'] = $_POST['surname'];
-        $_SESSION['email'] = $_POST['email'];
-        $_SESSION['tc'] = $_POST['tc'];
-        $_SESSION['tel'] = $_POST['tel'];
-        $_SESSION['birthday'] = $_POST['birthday'];
+        $_SESSION['name'] = $PName;
+        $_SESSION['surname'] = $PSurname;
+        $_SESSION['email'] = $PEmail;
+        $_SESSION['tc'] = $PTC;
+        $_SESSION['tel'] = $PPhone;
+        $_SESSION['birthday'] = $PBirthday;
         $_SESSION['login'] = true;
 
     }
