@@ -3,10 +3,23 @@
 <?php require 'inc/backend/config.php'; ?>
 <?php require 'inc/_global/views/head_start.php'; ?>
 <?php $cb->get_css('js/plugins/sweetalert2/sweetalert2.min.css'); ?>
+<?php $cb->get_css('js/plugins/ion-rangeslider/css/ion.rangeSlider.min.css'); ?>
+<?php $cb->get_css('js/plugins/ion-rangeslider/css/ion.rangeSlider.skinHTML5.min.css'); ?>
 <?php require 'inc/_global/views/head_end.php'; ?>
 <?php require 'inc/_global/views/page_start.php'; ?>
 
 <?php $fetch = MySqlQuery('SELECT * FROM kobis WHERE user_id=?', [$_SESSION['id']], 'rows', 0); ?>
+
+    <style>
+        .select {
+            width: 100%;
+            margin-top: 6px;
+            border: none;
+            -webkit-border-radius: none;
+            -moz-border-radius: none;
+            border-radius: none;
+        }
+    </style>
 
 <!-- Page Content -->
 <div class="content" style="">
@@ -42,9 +55,10 @@
                 <thead>
                     <tr>
 
-                        <th>Name</th>
-                        <th class="d-none d-sm-table-cell" style="width: 15%;">Access</th>
-                        <th class="d-none d-sm-table-cell" style="width: 20%;">Date</th>
+                        <th>KOBİ</th>
+                        <th class="d-none d-sm-table-cell" style="width: 20%;">Sektör</th>
+                        <th class="d-none d-sm-table-cell" style="width: 20%;">İhtiyaç</th>
+                        <th class="d-none d-sm-table-cell" style="width: 15%;">Hasar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,14 +68,19 @@
                     ?>
                     <tr>
                         <td>
-                            <p class="font-w600 mb-10"><?php echo $kobi['name']; ?></p>
+                            <p class="font-w600 mb-10"><?php echo $kobi['name']; ?> (<?php $u = MySqlQuery('SELECT * FROM users WHERE id=?', [$kobi['user_id']], 'rows', 0); echo substr($u[0]['name'], 0, 1) . '. ' . $u[0]['surname']; ?>)</p>
                             <p class="text-muted mb-0"><?=substr($kobi['description'], 0, 60)?><?php if($kobi['description'] > 60) echo '...'; ?></p>
                         </td>
                         <td class="d-sm-table-cell">
-                            <?php $cb->get_tag(); ?>
+                            <em class="text-muted">
+                                <?=$kobi['type']?>, <?php $query = MySqlQuery('SELECT * FROM sectors WHERE id=?',  [$kobi['sector_id']], 'rows', 0); echo $query[0]['name']; ?>
+                            </em>
                         </td>
                         <td class="d-sm-table-cell">
-                            <em class="text-muted">November <?php echo rand(1, 28); ?>, 2017 13:17</em>
+                            <?php echo $kobi['needs']; ?>
+                        </td>
+                        <td class="d-sm-table-cell">
+                            <?php $cb->get_tag($kobi['status']); ?>
                         </td>
                     </tr>
                     <?php } ?>
@@ -218,15 +237,22 @@ if(empty($fetch)):
                             <div class="form-group row">
                                 <div class="col-12">
                                     <div class="form-material form-material-primary input-group">
-                                        <input type="text" class="form-control" id="isletme-durumu"  value="<?=$fetch[0]['status']?>" name="isletme-durumu" placeholder="İşletmenizin Durumu (Normal, Zarar Gördü, Kullanılamaz Halde)">
-                                        <label for="isletme-durumu">İşletmenizin Durumu</label>
+                                        <div class="col-md-12 col-12">
+                                            <input type="text" class="js-rangeslider" data-prefix="%" id="isletme-durumu" name="isletme-durumu" value="50" data-grid="true" data-step="10" data-min="0" data-max="100">
+                                        </div>
+                                        
+                                        <label for="isletme-durumu">İşletmenizin Hasarı</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-12">
                                     <div class="form-material form-material-primary input-group">
-                                        <input type="text" class="form-control" id="isletme-ihtiyac-durumu"  value="<?=$fetch[0]['needs']?>" name="isletme-ihtiyac-durumu" placeholder="İşletmenizin İhtiyaç Durumu (Eleman, Sermaye, Tedarikçi)">
+                                        <select class="select" name="isletme-ihtiyac-durumu" id="isletme-ihtiyac-durumu">
+                                            <option value="Eleman">Eleman</option>
+                                            <option value="Sermaye">Sermaye</option>
+                                            <option value="Tedarikçi">Tedarikçi</option>
+                                        </select>
                                         <label for="isletme-ihtiyac-durumu">İşletmenizin İhtiyaç Durumu</label>
                                     </div>
                                 </div>
@@ -234,7 +260,7 @@ if(empty($fetch)):
                             <div class="form-group row">
                                 <div class="col-12">
                                     <div class="form-material form-material-primary input-group">
-                                        <textarea type="text" class="form-control" id="isletme-aciklama" name="isletme-aciklama" placeholder="Açıklama..."><?=$fetch[0]['description']?></textarea>
+                                        <textarea type="text" class="form-control" id="isletme-aciklama" name="isletme-aciklama" placeholder="Belirtmek istediğiniz diğer şeyleri yazın..."><?=$fetch[0]['description']?></textarea>
                                         <label for="isletme-aciklama">Açıklama</label>
                                     </div>
                                 </div>
@@ -267,6 +293,7 @@ if(empty($fetch)):
     });
 </script>
 
+<?php $cb->get_js('js/plugins/ion-rangeslider/js/ion.rangeSlider.min.js'); ?>
 <!-- Page JS Plugins -->
 <?php $cb->get_js('js/plugins/jquery-validation/jquery.validate.min.js'); ?>
 
@@ -279,3 +306,10 @@ if(empty($fetch)):
 <?php $cb->get_js('js/pages/be_pages_dashboard.js'); ?>
 
 <?php require 'inc/_global/views/footer_end.php'; ?>
+
+<script>
+    jQuery(function () {
+        // Init page helpers (BS Datepicker + BS Colorpicker + BS Maxlength + Select2 + Masked Input + Range Sliders + Tags Inputs plugins)
+        Codebase.helpers(['rangeslider']);
+    });
+</script>

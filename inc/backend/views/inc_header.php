@@ -111,28 +111,16 @@
                     <?=substr($_SESSION['name'], 0, 1)?>. <?=$_SESSION['surname']?><i class="fa fa-angle-down ml-5"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right min-width-150" aria-labelledby="page-header-user-dropdown">
-                    <a class="dropdown-item" href="be_pages_generic_profile.php">
-                        <i class="si si-user mr-5"></i> Profile
-                    </a>
-                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="be_pages_generic_inbox.php">
-                        <span><i class="si si-envelope-open mr-5"></i> Inbox</span>
-                        <span class="badge badge-primary">3</span>
-                    </a>
-                    <a class="dropdown-item" href="be_pages_generic_invoice.php">
-                        <i class="si si-note mr-5"></i> Invoices
-                    </a>
-                    <div class="dropdown-divider"></div>
-
                     <!-- Toggle Side Overlay -->
                     <!-- Layout API, functionality initialized in Codebase() -> uiApiLayout() -->
                     <a class="dropdown-item" href="javascript:void(0)" data-toggle="layout" data-action="side_overlay_toggle">
-                        <i class="si si-wrench mr-5"></i> Settings
+                        <i class="si si-wrench mr-5"></i> Ayarlar
                     </a>
                     <!-- END Side Overlay -->
 
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="op_auth_signin.php">
-                        <i class="si si-logout mr-5"></i> Sign Out
+                    <a class="dropdown-item" href="logout.php">
+                        <i class="si si-logout mr-5"></i> Çıkış Yap
                     </a>
                 </div>
             </div>
