@@ -1,4 +1,4 @@
-         <?php
+<?php
 /**
  * head_start.php
  *
