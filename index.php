@@ -37,7 +37,17 @@
             </a>
         </div>
         <?php else: ?>
-        <div class="col-12 col-md-12 col-xl-12">
+        <div class="col-6 col-md-6 col-xl-6">
+            <a class="block block-link-shadow text-center" target="_blank" href="/articledetails.php?id=<?=$fetch[0]['id']?>">
+                <div class="block-content ribbon ribbon-bookmark ribbon-success ribbon-left">
+                    <p class="mt-5">
+                        <i class="fa fa-building fa-3x"></i>
+                    </p>
+                    <p class="font-w600">İşletmem</p>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-md-6 col-xl-6">
                 <a class="block block-link-shadow text-center" data-toggle="modal" data-target="#modal-compose2">
                     <div class="block-content ribbon ribbon-bookmark ribbon-success ribbon-left">
                         <p class="mt-5">
@@ -51,14 +61,14 @@
         <?php endif; ?>
 	<div class="col-12 col-md-12 col-xl-12 gutters-tiny invisible" data-toggle="appear" style="background: white;">
 		<!-- If you put a checkbox in thead section, it will automatically toggle all tbody section checkboxes -->
-<table class="js-table-checkable table table-hover col-12 col-md-12 col-xl-12" style="width: 100%;">
+<table class="js-table-checkable table table-responsive table-hover col-12 col-md-12 col-xl-12" style="width: 100%;">
                 <thead>
                     <tr>
 
-                        <th>KOBİ</th>
-                        <th class="d-none d-sm-table-cell" style="width: 20%;">Sektör</th>
-                        <th class="d-none d-sm-table-cell" style="width: 20%;">İhtiyaç</th>
-                        <th class="d-none d-sm-table-cell" style="width: 15%;">Hasar</th>
+                        <th style="width: 25%;">KOBİ</th>
+                        <th class="d-sm-table-cell" style="width: 20%;">Sektör</th>
+                        <th class="d-sm-table-cell" style="width: 20%;">İhtiyaç</th>
+                        <th class="d-sm-table-cell" style="width: 15%;">Hasar</th>
                     </tr>
                 </thead>
                 <tbody>

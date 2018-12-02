@@ -22,7 +22,7 @@ $kobi = $kobi[0];
 <!-- Page Content -->
 <div class="content">
     <h2 class="content-heading">
-        <?=$kobi['name']?> <small><?=$kobi['type']?>, <?php $query = MySqlQuery('SELECT * FROM sectors WHERE id=?',  [$kobi['sector_id']], 'rows', 0); echo $query[0]['name']; ?></small>
+        <?=$kobi['name']?> <small><?=$kobi['type']?>, <?=$kobi['sector']?></small>
         <div class="btn-group float-right">
             <a class="btn btn-secondary" href="index.php">
                 <i class="fa fa-th-large text-primary mr-5 "></i> Tüm Kobiler
@@ -60,6 +60,10 @@ $kobi = $kobi[0];
                     <table class="table table-striped table-borderless mt-20">
                         <tbody>
                             <tr>
+                                <td class="font-w600">İsim</td>
+                                <td><?=$user['name']?> <?=$user['surname']?></td>
+                            </tr>
+                            <tr>
                                 <td class="font-w600">Kobi</td>
                                 <td><?=$kobi['name']?></td>
                             </tr>
@@ -75,7 +79,7 @@ $kobi = $kobi[0];
                             </tr>
                             <tr>
                                 <td class="font-w600">Adres</td>
-                                <td><?=$kobi['address']?></td>
+                                <td><a href="https://www.google.com/maps/search/<?=$kobi['address']?>" target="_blank"><?=$kobi['address']?></a></td>
                             </tr>
                             <tr>
                                 <td class="font-w600">E-Posta</td>
@@ -83,7 +87,7 @@ $kobi = $kobi[0];
                             </tr>
                             <tr>
                                 <td class="font-w600">Sorcial</td>
-                                <td><a href="https://sorcial.com/<?=$user['sorcial']?>"><?=$user['sorcial']?></a></td>
+                                <td><a target="_blank" href="https://sorcial.com/<?=$user['sorcial']?>"><?=$user['sorcial']?></a></td>
                             </tr>
                         </tbody>
                     </table>
@@ -96,6 +100,7 @@ $kobi = $kobi[0];
                         </div>
                     </div>
                 </div>
+
                 <div class="col-sm-6 nice-copy">
                     <div class="js-slider slick-nav-black slick-dotted-inner slick-dotted-white" data-dots="true" data-arrows="true">
                         <div>
@@ -110,6 +115,7 @@ $kobi = $kobi[0];
         <!-- END Project -->
 
         <!-- Key Features -->
+        <!--
         <div class="block-content-full border-t">
             <div class="row text-center py-30 invisible" data-toggle="appear">
                <div class="col-6 col-md-4 col-xl-3 py-30">
@@ -138,6 +144,7 @@ $kobi = $kobi[0];
                 </div>
             </div>
         </div>
+        -->
     </div>
 </div>
 <!-- END Page Content -->

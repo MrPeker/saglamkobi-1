@@ -19,6 +19,13 @@
     <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/flat.min.css"> -->
     <?php if ($cb->theme) { ?>
     <link rel="stylesheet" id="css-theme" href="<?php echo $cb->assets_folder; ?>/css/themes/<?php echo $cb->theme; ?>.min.css">
+        <style>
+            @media screen and (max-width: 600px) {
+                table.table {
+                    margin-left: -16px !important;
+                }
+            }
+        </style>
     <?php } ?>
     <!-- END Stylesheets -->
 </head>

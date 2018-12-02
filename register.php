@@ -139,7 +139,7 @@ if(isset($_SESSION['login'])) {
                             <a class="link-effect text-muted mr-10 mb-5 d-inline-block" href="#" data-toggle="modal" data-target="#modal-terms">
                                 <i class="fa fa-book text-muted mr-5"></i> Sözleşme Oku
                             </a>
-                            <a class="link-effect text-muted mr-10 mb-5 d-inline-block" href="op_auth_signin2.php">
+                            <a class="link-effect text-muted mr-10 mb-5 d-inline-block" href="login.php">
                                 <i class="fa fa-user text-muted mr-5"></i> Giriş Yap
                             </a>
                         </div>

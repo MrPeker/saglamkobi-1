@@ -11,12 +11,13 @@
 if(isset($_POST['Keyword'])){
 	$keyword = $_POST['Keyword'];
 }
-$sql="SELECT * FROM kobis WHERE name LIKE :keyword OR sector LIKE :sector OR type LIKE :tip OR needs LIKE :needs";
+$sql="SELECT * FROM kobis WHERE name LIKE :keyword OR sector LIKE :sector OR type LIKE :tip OR needs LIKE :needs OR address LIKE :address";
 $q=$db->prepare($sql);
 $q->bindValue(':keyword','%'.$keyword.'%');
 $q->bindValue(':sector','%'.$keyword.'%');
 $q->bindValue(':tip','%'.$keyword.'%');
 $q->bindValue(':needs','%'.$keyword.'%');
+$q->bindValue(':address','%'.$keyword.'%');
 $q->execute();
 $Response = $q->fetchAll(PDO::FETCH_ASSOC);
 
@@ -44,16 +45,16 @@ $Response = $q->fetchAll(PDO::FETCH_ASSOC);
 		<div class="font-size-h3 font-w600 py-30 mb-20 text-center border-b">
 				<span class="text-primary font-w700"><mark class="text-danger"><?=$keyword?></mark> <span style="color: #575757;">için</span> <?php echo count($Response); ?></span> KOBI bulundu
 			</div>
-			<table class="table table-striped table-borderless table-hover table-vcenter">
+			<table style="min-width: 100%; display: table;" class="table table-striped table-responsive table-borderless table-hover table-vcenter">
 				<thead class="thead-light">
 					<tr>
 						<th style="width: 50%;">Kobi</th>
 						<th class="text-center" style="width: 15%;">Sektor</th>
-						<th class="d-none d-lg-table-cell text-center" style="width: 15%;">Ihtiyac</th>
-						<th class="d-none d-lg-table-cell text-center" style="width: 20%;">Hasar</th>
+						<th class="d-lg-table-cell text-center" style="width: 15%;">Ihtiyac</th>
+						<th class="d-lg-table-cell text-center" style="width: 20%;">Hasar</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody style="min-width: 100%;">
 				<?php foreach($Response as $Deger){ ?>
 					<tr>
 						<td>
@@ -64,10 +65,10 @@ $Response = $q->fetchAll(PDO::FETCH_ASSOC);
 								<?php echo $Deger["description"]; ?>
 							</p>
 						</td>
-						<td class="d-none d-lg-table-cell text-center">
+						<td class="d-lg-table-cell text-center">
                             <?=$Deger['type']?>, <?=$Deger['sector']?>
 						</td>
-						<td class="d-none d-lg-table-cell font-size-xl text-center font-w600">
+						<td class="d-lg-table-cell font-size-xl text-center font-w600">
                             <?=$Deger['needs']?>
                         </td>
 						<td class="font-size-xl text-center font-w600"><?=$cb->get_tag($Deger['status'])?></td>

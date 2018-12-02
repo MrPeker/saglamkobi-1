@@ -51,7 +51,7 @@
                     <div class="content-header-item">
                         <a class="link-effect font-w700" href="index.php">
                             <i class="si si-fire text-primary"></i>
-                            <span class="font-size-xl text-dual-primary-dark">code</span><span class="font-size-xl text-primary">base</span>
+                            <span class="font-size-xl text-dual-primary-dark">Sağlam</span><span class="font-size-xl text-primary">Ortak</span>
                         </a>
                     </div>
                     <!-- END Logo -->
@@ -84,7 +84,7 @@
                             </a>
                         </li>
                         <li class="list-inline-item">
-                            <a class="link-effect text-dual-primary-dark" href="op_auth_signin.php">
+                            <a class="link-effect text-dual-primary-dark" href="logout.php">
                                 <i class="si si-logout"></i>
                             </a>
                         </li>
