@@ -70,12 +70,12 @@
 
                 <!-- Visible only in normal mode -->
                 <div class="sidebar-mini-hidden-b text-center">
-                    <a class="img-link" href="be_pages_generic_profile.php">
+                    <a class="img-link" href="index.php">
                         <?php $cb->get_avatar('15'); ?>
                     </a>
                     <ul class="list-inline mt-10">
                         <li class="list-inline-item">
-                            <a class="link-effect text-dual-primary-dark font-size-xs font-w600 text-uppercase" href="be_pages_generic_profile.php"><?=substr($_SESSION['name'], 0, 1)?>. <?=$_SESSION['surname']?></a>
+                            <a class="link-effect text-dual-primary-dark font-size-xs font-w600 text-uppercase" href="index.php"><?=substr($_SESSION['name'], 0, 1)?>. <?=$_SESSION['surname']?></a>
                         </li>
                         <li class="list-inline-item">
                             <!-- Layout API, functionality initialized in Codebase() -> uiApiLayout() -->

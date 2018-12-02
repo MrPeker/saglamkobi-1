@@ -66,23 +66,25 @@
                         $kobis = MySqlQuery('SELECT * FROM kobis WHERE user_id != ?', [$_SESSION['id']], 'rows', 0);
                         foreach ($kobis as $kobi) {
                     ?>
-                    <tr>
-                        <td>
-                            <p class="font-w600 mb-10"><?php echo $kobi['name']; ?> (<?php $u = MySqlQuery('SELECT * FROM users WHERE id=?', [$kobi['user_id']], 'rows', 0); echo substr($u[0]['name'], 0, 1) . '. ' . $u[0]['surname']; ?>)</p>
-                            <p class="text-muted mb-0"><?=substr($kobi['description'], 0, 60)?><?php if($kobi['description'] > 60) echo '...'; ?></p>
-                        </td>
-                        <td class="d-sm-table-cell">
-                            <em class="text-muted">
-                                <?=$kobi['type']?>, <?php $query = MySqlQuery('SELECT * FROM sectors WHERE id=?',  [$kobi['sector_id']], 'rows', 0); echo $query[0]['name']; ?>
-                            </em>
-                        </td>
-                        <td class="d-sm-table-cell">
-                            <?php echo $kobi['needs']; ?>
-                        </td>
-                        <td class="d-sm-table-cell">
-                            <?php $cb->get_tag($kobi['status']); ?>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                <a target="_blank" href="articledetails.php?id=<?=$kobi['id']?>">
+                                <p class="font-w600 mb-10"><?php echo $kobi['name']; ?> (<?php $u = MySqlQuery('SELECT * FROM users WHERE id=?', [$kobi['user_id']], 'rows', 0); echo substr($u[0]['name'], 0, 1) . '. ' . $u[0]['surname']; ?>)</p>
+                                <p class="text-muted mb-0"><?=substr($kobi['description'], 0, 60)?><?php if($kobi['description'] > 60) echo '...'; ?></p>
+                                </a>
+                            </td>
+                            <td class="d-sm-table-cell">
+                                <em class="text-muted">
+                                    <?=$kobi['type']?>, <?php $query = MySqlQuery('SELECT * FROM sectors WHERE id=?',  [$kobi['sector_id']], 'rows', 0); echo $query[0]['name']; ?>
+                                </em>
+                            </td>
+                            <td class="d-sm-table-cell">
+                                <?php echo $kobi['needs']; ?>
+                            </td>
+                            <td class="d-sm-table-cell">
+                                <?php $cb->get_tag($kobi['status']); ?>
+                            </td>
+                        </tr>
                     <?php } ?>
                 </tbody>
             </table>
@@ -120,6 +122,7 @@ if(empty($fetch)):
                                 <div class="form-material form-material-primary input-group">
                                     <input type="text" class="form-control" id="isletme-ismi" name="isletme-ismi" placeholder="İşletmenizin Adı">
                                     <label for="isletme-ismi">İşletme Adı</label>
+                                    <input type="hidden" value="<?=$fetch[0]['id']?>" name="id">
                                 </div>
                             </div>
                         </div>
@@ -129,15 +132,15 @@ if(empty($fetch)):
                                     <label for="isletme-sektor">İşletmenizin Sektörü</label>
                                     <select class="form-control" id="example-multiple-select" name="isletme-sektor" size="7" multiple>
                                         <?php
-                                            $sectors = $db->query('SELECT * FROM sectors')->fetchAll();
-                                            foreach($sectors as $sector):
-                                        ?>
-                                        <option value="<?=$sector['id']?>"><?=$sector['name']?></option>
+                                        $sectors = $db->query('SELECT * FROM sectors')->fetchAll();
+                                        foreach($sectors as $sector):
+                                            ?>
+                                            <option value="<?=$sector['id']?>"><?=$sector['name']?></option>
                                         <?php endforeach; ?>
                                     </select>
-                             </div>
-                          </div>
-						</div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <div class="col-12">
                                 <div class="form-material form-material-primary input-group">
@@ -149,15 +152,18 @@ if(empty($fetch)):
                         <div class="form-group row">
                             <div class="col-12">
                                 <div class="form-material form-material-primary input-group">
-                                    <input type="text" class="form-control" id="isletme-durumu" name="isletme-durumu" placeholder="İşletmenizin Durumu (Normal, Zarar Gördü, Kullanılamaz Halde)">
-                                    <label for="isletme-durumu">İşletmenizin Durumu</label>
+                                    <div class="col-md-12 col-12">
+                                        <input type="text" class="js-rangeslider" data-prefix="%" id="isletme-durumu" name="isletme-durumu" value="50" data-grid="true" data-step="10" data-min="0" data-max="100">
+                                    </div>
+
+                                    <label for="isletme-durumu">İşletmenizin Hasarı</label>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-12">
                                 <div class="form-material form-material-primary input-group">
-                                    <input type="text" class="form-control" id="isletme-ihtiyac-durumu" name="isletme-ihtiyac-durumu" placeholder="İşletmenizin İhtiyaç Durumu (Eleman, Sermaye, Tedarikçi)">
+                                    <input type="text" class="form-control" name="isletme-ihtiyac-durum" id="isletme-ihtiyac-durum">
                                     <label for="isletme-ihtiyac-durumu">İşletmenizin İhtiyaç Durumu</label>
                                 </div>
                             </div>
@@ -165,7 +171,15 @@ if(empty($fetch)):
                         <div class="form-group row">
                             <div class="col-12">
                                 <div class="form-material form-material-primary input-group">
-                                    <textarea type="text" class="form-control" id="isletme-aciklama" name="isletme-aciklama" placeholder="Açıklama..."></textarea>
+                                    <input type="text" class="form-control" name="isletme-adres" id="isletme-adres">
+                                    <label for="isletme-ihtiyac-durumu">İşletmenizin Adresi</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <div class="form-material form-material-primary input-group">
+                                    <textarea type="text" class="form-control" id="isletme-aciklama" name="isletme-aciklama" placeholder="Belirtmek istediğiniz diğer şeyleri yazın..."></textarea>
                                     <label for="isletme-aciklama">Açıklama</label>
                                 </div>
                             </div>
@@ -238,7 +252,7 @@ if(empty($fetch)):
                                 <div class="col-12">
                                     <div class="form-material form-material-primary input-group">
                                         <div class="col-md-12 col-12">
-                                            <input type="text" class="js-rangeslider" data-prefix="%" id="isletme-durumu" name="isletme-durumu" value="50" data-grid="true" data-step="10" data-min="0" data-max="100">
+                                            <input type="text" value="<?=$fetch[0]['status']?>" class="js-rangeslider" data-prefix="%" id="isletme-durumu" name="isletme-durumu" value="50" data-grid="true" data-step="10" data-min="0" data-max="100">
                                         </div>
                                         
                                         <label for="isletme-durumu">İşletmenizin Hasarı</label>
@@ -248,12 +262,16 @@ if(empty($fetch)):
                             <div class="form-group row">
                                 <div class="col-12">
                                     <div class="form-material form-material-primary input-group">
-                                        <select class="select" name="isletme-ihtiyac-durumu" id="isletme-ihtiyac-durumu">
-                                            <option value="Eleman">Eleman</option>
-                                            <option value="Sermaye">Sermaye</option>
-                                            <option value="Tedarikçi">Tedarikçi</option>
-                                        </select>
+                                        <input type="text" name="isletme-ihtiyac-durumu" value="<?=$fetch[0]['needs']?>" class="form-control" id="isletme-ihtiyac-durumu">
                                         <label for="isletme-ihtiyac-durumu">İşletmenizin İhtiyaç Durumu</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <div class="form-material form-material-primary input-group">
+                                        <input type="text" name="isletme-adres" class="form-control" value="<?=$fetch[0]['address']?>" id="isletme-adres">
+                                        <label for="isletme-ihtiyac-durumu">İşletmenizin Adresi</label>
                                     </div>
                                 </div>
                             </div>

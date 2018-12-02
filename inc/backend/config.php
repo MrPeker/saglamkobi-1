@@ -13,7 +13,7 @@
 // **************************************************************************************************
 
 //                              : Useful for adding different sidebars/headers per page or per section
-$cb->inc_side_overlay           = 'inc/backend/views/inc_side_overlay.php';
+//$cb->inc_side_overlay           = 'inc/backend/views/inc_side_overlay.php';
 $cb->inc_sidebar                = 'inc/backend/views/inc_sidebar.php';
 $cb->inc_header                 = 'inc/backend/views/inc_header.php';
 $cb->inc_footer                 = 'inc/backend/views/inc_footer.php';

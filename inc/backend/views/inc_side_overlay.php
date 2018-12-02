@@ -24,10 +24,10 @@
 
                 <!-- User Info -->
                 <div class="content-header-item">
-                    <a class="img-link mr-5" href="be_pages_generic_profile.php">
+                    <a class="img-link mr-5" href="index.php">
                         <?php $cb->get_avatar('15', '', 32, false); ?>
                     </a>
-                    <a class="align-middle link-effect text-primary-dark font-w600" href="be_pages_generic_profile.php">John Smith</a>
+                    <a class="align-middle link-effect text-primary-dark font-w600" href="index.php">John Smith</a>
                 </div>
                 <!-- END User Info -->
             </div>
@@ -88,28 +88,28 @@
                 <div class="block-content">
                     <ul class="nav-users push">
                         <li>
-                            <a href="be_pages_generic_profile.php">
+                            <a href="index.php">
                                 <?php $cb->get_avatar('', 'female'); ?>
                                 <i class="fa fa-circle text-success"></i> <?php $cb->get_name('female'); echo "\n"; ?>
                                 <div class="font-w400 font-size-xs text-muted">Photographer</div>
                             </a>
                         </li>
                         <li>
-                            <a href="be_pages_generic_profile.php">
+                            <a href="index.php">
                                 <?php $cb->get_avatar('', 'male'); ?>
                                 <i class="fa fa-circle text-success"></i> <?php $cb->get_name('male'); echo "\n"; ?>
                                 <div class="font-w400 font-size-xs text-muted">Web Designer</div>
                             </a>
                         </li>
                         <li>
-                            <a href="be_pages_generic_profile.php">
+                            <a href="index.php">
                                 <?php $cb->get_avatar('', 'female'); ?>
                                 <i class="fa fa-circle text-warning"></i> <?php $cb->get_name('female'); echo "\n"; ?>
                                 <div class="font-w400 font-size-xs text-muted">UI Designer</div>
                             </a>
                         </li>
                         <li>
-                            <a href="be_pages_generic_profile.php">
+                            <a href="index.php">
                                 <?php $cb->get_avatar('', 'male'); ?>
                                 <i class="fa fa-circle text-danger"></i> <?php $cb->get_name('male'); echo "\n"; ?>
                                 <div class="font-w400 font-size-xs text-muted">Copywriter</div>
