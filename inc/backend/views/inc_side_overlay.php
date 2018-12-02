@@ -39,9 +39,10 @@
             <!-- Search -->
             <div class="block pull-t pull-r-l">
                 <div class="block-content block-content-full block-content-sm bg-body-light">
-                    <form action="be_pages_generic_search.php" method="post">
+                    <form action="Search.php" method="post">
                         <div class="input-group">
-                            <input type="text" class="form-control" id="side-overlay-search" name="side-overlay-search" placeholder="Search..">
+                            <input type="text" name="Keyword" class="form-control" placeholder="Search web app..">
+							<input type="hidden" name="Catagory" class="form-control" value="" placeholder="Search web app..">
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-secondary px-10">
                                     <i class="fa fa-search"></i>
