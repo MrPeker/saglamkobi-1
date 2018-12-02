@@ -21,9 +21,16 @@ $kobi = $kobi[0];
 
 <!-- Page Content -->
 <div class="content">
-    <h2 class="content-heading"><?=$kobi['name']?> <small><?=$kobi['type']?>, <?php $query = MySqlQuery('SELECT * FROM sectors WHERE id=?',  [$kobi['sector_id']], 'rows', 0); echo $query[0]['name']; ?></small></h2>
+    <h2 class="content-heading">
+        <?=$kobi['name']?> <small><?=$kobi['type']?>, <?php $query = MySqlQuery('SELECT * FROM sectors WHERE id=?',  [$kobi['sector_id']], 'rows', 0); echo $query[0]['name']; ?></small>
+        <div class="btn-group float-right">
+            <a class="btn btn-secondary" href="index.php">
+                <i class="fa fa-th-large text-primary mr-5 "></i> Tüm Kobiler
+            </a>
+        </div>
+    </h2>
     <div class="block">
-        <!-- Navigation -->
+        <!-- Navigation
         <div class="block-content block-content-full border-b clearfix">
             <div class="btn-group float-right">
                 <a class="btn btn-secondary" href="index.php">
@@ -36,9 +43,9 @@ $kobi = $kobi[0];
                 <a class="btn btn-secondary" href="javascript:void(0)">
                     İleri <i class="fa fa-arrow-right text-primary ml-5"></i>
                 </a>
-                --->
             </div>
         </div>
+                --->
         <!-- END Navigation -->
 
         <!-- Project -->
@@ -58,7 +65,7 @@ $kobi = $kobi[0];
                             </tr>
                             <tr>
                                 <td class="font-w600">Kobi Türü</td>
-                                <td><?=$kobi['type']?>, <?php echo $query[0]['name']; ?></td>
+                                <td><?=$kobi['type']?>, <?=$kobi['sector']?></td>
                             </tr>
                             <tr>
                                 <td class="font-w600">Telefon</td>
@@ -69,7 +76,15 @@ $kobi = $kobi[0];
                             <tr>
                                 <td class="font-w600">Adres</td>
                                 <td><?=$kobi['address']?></td>
-                            </tr>							
+                            </tr>
+                            <tr>
+                                <td class="font-w600">E-Posta</td>
+                                <td><a href="mailto:<?=$user['email']?>"><?=$user['email']?></a></td>
+                            </tr>
+                            <tr>
+                                <td class="font-w600">Sorcial</td>
+                                <td><a href="https://sorcial.com/<?=$user['sorcial']?>"><?=$user['sorcial']?></a></td>
+                            </tr>
                         </tbody>
                     </table>
                     <!-- END Project Info -->

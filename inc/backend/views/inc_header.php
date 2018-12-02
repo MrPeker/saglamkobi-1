@@ -65,8 +65,8 @@
                         </button>
                         <!-- END Close Search Section -->
                     </div>
-                   <input type="text" name="Keyword" class="form-control" placeholder="Search web app..">
-					<input type="hidden" name="Catagory" class="form-control" value="" placeholder="Search web app..">
+                   <input type="text" name="Keyword" class="form-control" placeholder="Kobi ara..">
+					<input type="hidden" name="Catagory" class="form-control" value="" placeholder="Kobi ara..">
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-secondary">
                             <i class="fa fa-search"></i>

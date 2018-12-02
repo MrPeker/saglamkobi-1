@@ -30,7 +30,7 @@ if(isset($_SESSION['login'])) {
                     <a class="link-effect font-w700">
                         <span class="font-size-xl text-primary-dark">Sağlam</span><span class="font-size-xl"> Kobi</span>
                     </a>
-                    <h1 class="h3 font-w700 mt-30 mb-10">Sağlam Kobi'ye Hoşgeldiniz</h1>
+                    <h1 class="h3 font-w700 mt-30 mb-10">Sağlam Ortak'a Hoşgeldiniz</h1>
                     <h2 class="h5 font-w400 text-muted mb-0">Lütfen giriş yapın</h2>
                 </div>
                 <!-- END Header -->

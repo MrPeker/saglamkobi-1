@@ -23,7 +23,7 @@
                     <a class="link-effect font-w700" href="#">
                         <span class="font-size-xl text-primary-dark">Sağlam</span><span class="font-size-xl"> Kobi</span>
                     </a>
-                    <h1 class="h3 font-w700 mt-30 mb-10">Merak Etme , Arkanı Kollarız.</h1>
+                    <h1 class="h3 font-w700 mt-30 mb-10">Merak Etme, Arkanı Kollarız.</h1>
                     <h2 class="h5 font-w400 text-muted mb-0">Lütfen Email Adresinizi Giriniz..</h2>
                 </div>
                 <!-- END Header -->
@@ -31,7 +31,7 @@
                 <!-- Reminder Form -->
                 <!-- jQuery Validation (.js-validation-reminder class is initialized in js/pages/op_auth_reminder.js) -->
                 <!-- For more examples you can check out https://github.com/jzaefferer/jquery-validation -->
-                <form class="js-validation-reminder px-30" action="be_pages_auth_all.php" method="post">
+                <form class="js-validation-reminder px-30" action="login.php" method="post">
                     <div class="form-group row">
                         <div class="col-12">
                             <div class="form-material floating">
@@ -45,7 +45,7 @@
                             <i class="fa fa-asterisk mr-10"></i> Şifre Hatırlatma
                         </button>
                         <div class="mt-30">
-                            <a class="link-effect text-muted mr-10 mb-5 d-inline-block" href="op_auth_signin2.php">
+                            <a class="link-effect text-muted mr-10 mb-5 d-inline-block" href="login.php">
                                 <i class="fa fa-user text-muted mr-5"></i> Giriş Yap
                             </a>
                         </div>

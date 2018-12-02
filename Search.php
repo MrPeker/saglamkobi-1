@@ -11,15 +11,12 @@
 if(isset($_POST['Keyword'])){
 	$keyword = $_POST['Keyword'];
 }
-if(isset($_POST['Catagory'])){
-	$Catagory = $_POST['Catagory'];
-}
-$sql="SELECT * FROM kobis WHERE name LIKE :keyword";
-if(strlen($Catagory) > 1){
-	$sql .= " And sector_id LIKE '".$Catagory."'";
-}
+$sql="SELECT * FROM kobis WHERE name LIKE :keyword OR sector LIKE :sector OR type LIKE :tip OR needs LIKE :needs";
 $q=$db->prepare($sql);
 $q->bindValue(':keyword','%'.$keyword.'%');
+$q->bindValue(':sector','%'.$keyword.'%');
+$q->bindValue(':tip','%'.$keyword.'%');
+$q->bindValue(':needs','%'.$keyword.'%');
 $q->execute();
 $Response = $q->fetchAll(PDO::FETCH_ASSOC);
 
@@ -30,8 +27,8 @@ $Response = $q->fetchAll(PDO::FETCH_ASSOC);
     <!-- Search -->
     <form class="push" action="Search.php" method="post">
         <div class="input-group input-group-lg">
-            <input type="text" name="Keyword" class="form-control" placeholder="Search web app..">
-            <input type="hidden" name="Catagory" class="form-control" value="" placeholder="Search web app..">
+            <input type="text" name="Keyword" class="form-control" placeholder="Kobi arayın..">
+            <input type="hidden" name="Category" class="form-control" value="" placeholder="Kobi arayın..">
             <div class="input-group-append">
                 <button type="submit" class="btn btn-secondary">
                     <i class="fa fa-search"></i>
@@ -45,7 +42,7 @@ $Response = $q->fetchAll(PDO::FETCH_ASSOC);
     <div class="block">
 		<!-- Classic -->
 		<div class="font-size-h3 font-w600 py-30 mb-20 text-center border-b">
-				<span class="text-primary font-w700"><?php echo count($Response); ?></span> projects found for <mark class="text-danger">creativity</mark>
+				<span class="text-primary font-w700"><mark class="text-danger"><?=$keyword?></mark> <span style="color: #575757;">için</span> <?php echo count($Response); ?></span> KOBI bulundu
 			</div>
 			<table class="table table-striped table-borderless table-hover table-vcenter">
 				<thead class="thead-light">
@@ -61,17 +58,19 @@ $Response = $q->fetchAll(PDO::FETCH_ASSOC);
 					<tr>
 						<td>
 							<h4 class="h5 mt-15 mb-5">
-								<a href="javascript:void(0)"><?php echo $Deger["name"]; ?></a>
+								<a href="/articledetails.php?id=<?=$Deger['id']?>"><?php echo $Deger["name"] . $Deger['user_id']; ?> (<?php $u = MySqlQuery('SELECT * FROM users WHERE id=?', [$Deger['user_id']], 'rows', 0); echo substr($u[0]['name'], 0, 1) . '. ' . $u[0]['surname']; ?>)</a>
 							</h4>
 							<p class="d-none d-sm-block text-muted">
 								<?php echo $Deger["description"]; ?>
 							</p>
 						</td>
 						<td class="d-none d-lg-table-cell text-center">
-							<span class="badge badge-success">Completed</span>
+                            <?=$Deger['type']?>, <?=$Deger['sector']?>
 						</td>
-						<td class="d-none d-lg-table-cell font-size-xl text-center font-w600">1795</td>
-						<td class="font-size-xl text-center font-w600">$ 21,987</td>
+						<td class="d-none d-lg-table-cell font-size-xl text-center font-w600">
+                            <?=$Deger['needs']?>
+                        </td>
+						<td class="font-size-xl text-center font-w600"><?=$cb->get_tag($Deger['status'])?></td>
 					</tr>
 				<?php } ?>
 				</tbody>

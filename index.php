@@ -75,7 +75,7 @@
                             </td>
                             <td class="d-sm-table-cell">
                                 <em class="text-muted">
-                                    <?=$kobi['type']?>, <?php $query = MySqlQuery('SELECT * FROM sectors WHERE id=?',  [$kobi['sector_id']], 'rows', 0); echo $query[0]['name']; ?>
+                                    <?=$kobi['type']?>, <?=$kobi['sector']; ?>
                                 </em>
                             </td>
                             <td class="d-sm-table-cell">
@@ -135,7 +135,7 @@ if(empty($fetch)):
                                         $sectors = $db->query('SELECT * FROM sectors')->fetchAll();
                                         foreach($sectors as $sector):
                                             ?>
-                                            <option value="<?=$sector['id']?>"><?=$sector['name']?></option>
+                                            <option value="<?=$sector['name']?>"><?=$sector['name']?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
@@ -234,7 +234,7 @@ if(empty($fetch)):
                                             $sectors = $db->query('SELECT * FROM sectors')->fetchAll();
                                             foreach($sectors as $sector):
                                                 ?>
-                                                <option <?=$sector['id'] === $fetch[0]['sector_id'] ? 'selected' : ''?> value="<?=$sector['id']?>"><?=$sector['name']?></option>
+                                                <option <?=$sector['name'] === $fetch[0]['sector'] ? 'selected' : ''?> value="<?=$sector['name']?>"><?=$sector['name']?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>

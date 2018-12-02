@@ -44,12 +44,14 @@ if (!is_null($_POST["signup-password"])) {
     die();
 }
 
+$PSorcial = $_POST['signup-sorcial'] ?? '';
+
 if ($db->query("Select COUNT(*) from Users where Tc='$PTC' OR email='$PEmail'")->fetchAll()[0][0] > 0) {
     echo json_encode(array("status" => false, "message" => "userExists"));
     die();
 }
 try {
-    $stmt1 = $db->prepare("insert into users (name,surname,tc,birthday,phone,email,password) values ('$PName','$PSurname','$PTC','$PBirthday','$PPhone','$PEmail','$PPassword')");
+    $stmt1 = $db->prepare("insert into users (name,surname,tc,birthday,phone,email,password,sorcial) values ('$PName','$PSurname','$PTC','$PBirthday','$PPhone','$PEmail','$PPassword', '$PSorcial')");
     if($stmt1->execute()) {
         $_SESSION['id'] = $db->lastInsertId();
         $_SESSION['name'] = $PName;
@@ -58,6 +60,7 @@ try {
         $_SESSION['tc'] = $PTC;
         $_SESSION['tel'] = $PPhone;
         $_SESSION['birthday'] = $PBirthday;
+        $_SESSION['sorcial'] = $PSorcial;
         $_SESSION['login'] = true;
 
     }
